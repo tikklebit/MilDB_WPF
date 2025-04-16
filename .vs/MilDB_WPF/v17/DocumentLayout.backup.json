@@ -52,10 +52,9 @@
               "RelativeDocumentMoniker": "MilDB_WPF\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\vanyo\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\MainWindow.xaml.cs",
               "RelativeToolTip": "MilDB_WPF\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T14:43:50.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-16T14:43:50.2Z"
             },
             {
               "$type": "Document",
@@ -63,8 +62,8 @@
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\vanyo\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MilDB_WPF\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\vanyo\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\MainWindow.xaml*",
-              "RelativeToolTip": "MilDB_WPF\\MainWindow.xaml*",
+              "ToolTip": "C:\\Users\\vanyo\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\MainWindow.xaml",
+              "RelativeToolTip": "MilDB_WPF\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-04-16T14:23:20.327Z",
               "EditorCaption": ""

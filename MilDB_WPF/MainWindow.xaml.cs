@@ -5,6 +5,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -19,6 +20,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        this.StateChanged += MainWindow_StateChanged;
     }
 
     private void DragWindow(object sender, MouseButtonEventArgs e)
@@ -27,8 +29,27 @@ public partial class MainWindow : Window
             DragMove();
     }
 
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    private async void CloseButton_Click(object sender, RoutedEventArgs e)
     {
-        Application.Current.Shutdown();
+        var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+        this.BeginAnimation(OpacityProperty, fadeOut);
+        await Task.Delay(300);
+        this.Close();
+    }
+
+    private async void HideButton_Click(object sender, RoutedEventArgs e)
+    {
+        var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
+        this.BeginAnimation(OpacityProperty, fadeOut);
+        await Task.Delay(100);
+        WindowState = WindowState.Minimized;
+    }
+    private void MainWindow_StateChanged(object sender, EventArgs e)
+    {
+        if (WindowState == WindowState.Normal)
+        {
+            var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1));
+            this.BeginAnimation(OpacityProperty, fadeIn);
+        }
     }
 }

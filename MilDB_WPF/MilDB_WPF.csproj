@@ -9,10 +9,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="closeprogrambutton.png" />
+      <None Remove="hidewindowbutton.png" />
       <None Remove="mainWindowBG.png" />
     </ItemGroup>
 
     <ItemGroup>
+      <Resource Include="closeprogrambutton.png" />
+      <Resource Include="hidewindowbutton.png" />
       <Resource Include="mainWindowBG.png" />
     </ItemGroup>
 
