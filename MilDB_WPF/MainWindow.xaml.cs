@@ -34,7 +34,7 @@ public partial class MainWindow : Window
         var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
         this.BeginAnimation(OpacityProperty, fadeOut);
         await Task.Delay(300);
-        this.Close();
+        Application.Current.Shutdown();
     }
 
     private async void HideButton_Click(object sender, RoutedEventArgs e)
@@ -51,5 +51,12 @@ public partial class MainWindow : Window
             var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1));
             this.BeginAnimation(OpacityProperty, fadeIn);
         }
+    }
+
+    private void OpenSelectWindow_Click(object sender, RoutedEventArgs e)
+    {
+        Select selectWindow = new Select();
+        selectWindow.Show();
+        this.Hide();
     }
 }
