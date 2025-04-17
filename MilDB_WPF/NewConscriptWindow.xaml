@@ -89,7 +89,7 @@
                     <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0" Grid.ColumnSpan="2" Width="474">
                         <Button x:Name="SaveButton" HorizontalAlignment="Left" Content="ЗБЕРЕГТИ" Width="150" Height="50" Style="{StaticResource GlobalButtonStyle}"/>
                         <Button x:Name="CancelButton"  HorizontalAlignment="Center" Width="150" Height="50" Content="СКАСУВАТИ" Style="{StaticResource GlobalButtonStyle}"/>
-                        <Button x:Name="ExitButton"  HorizontalAlignment="Right" Width="150" Height="50" Content="ВИХІД" Style="{StaticResource GlobalButtonStyle}"/>
+                        <Button x:Name="ExitButton"  HorizontalAlignment="Right" Width="150" Height="50" Content="ВИХІД" Style="{StaticResource GlobalButtonStyle}" Click="ExitButton_Click"/>
                     </Grid>
                 </Grid>
             </Grid>

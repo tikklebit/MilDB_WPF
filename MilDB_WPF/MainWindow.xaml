@@ -41,7 +41,10 @@
                 <Grid>
 
                     <Button x:Name="CreateObjectButton" VerticalAlignment="Top" Margin="20" Content="СТВОРИТИ" Style="{StaticResource GlobalButtonStyle}" Click="OpenSelectWindow_Click"/>
-                    
+                    <Button x:Name="Button2" VerticalAlignment="Top" Margin="20, 100, 20, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Button3" VerticalAlignment="Center" Margin="20, 0, 20, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Button4" VerticalAlignment="Bottom" Margin="20, 0, 20, 20" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Button5" VerticalAlignment="Bottom" Margin="20, 0, 20, 100" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
                 </Grid>
             </Border>
         </Grid>

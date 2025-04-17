@@ -34,9 +34,9 @@ namespace MilDB_WPF
 
         private async void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
             this.BeginAnimation(OpacityProperty, fadeOut);
-            await Task.Delay(300);
+            await Task.Delay(100);
             Application.Current.Shutdown();
         }
 
@@ -54,6 +54,17 @@ namespace MilDB_WPF
                 var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1));
                 this.BeginAnimation(OpacityProperty, fadeIn);
             }
+        }
+
+        private async void ExitButton_Click(object sender, EventArgs e)
+        {
+            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
+            this.BeginAnimation(OpacityProperty, fadeOut);
+            await Task.Delay(100);
+            this.Hide();
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }
