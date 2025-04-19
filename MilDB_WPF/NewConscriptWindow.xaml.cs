@@ -66,5 +66,38 @@ namespace MilDB_WPF
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
         }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            string name = FullNameTextBox.Text;
+            DatePicker birthDate = BirthDatePicker;
+            string address = AddressTextBox.Text;
+            string healthStatus = HealthStatusTextBox.Text;
+            string fitnessCategory = FitnessCategoryComboBox.Text;
+            string status = StatusComboBox.Text;
+
+
+            if (birthDate.SelectedDate.HasValue)
+            {
+                Conscript? conscript = new Conscript(name, birthDate.SelectedDate.Value, address, healthStatus, fitnessCategory, status);
+                if (conscript.Valid())
+                {
+                    ConscriptList conscriptList = new ConscriptList();
+                    conscriptList.AddConscript(conscript);
+                    string greatMessage = conscript.GetCheck();
+                    ErrorLabel.Content = Visibility.Visible;
+                }
+                else
+                {
+                    string errorMessage = conscript.GetCheck();
+                    ErrorLabel.Content = errorMessage;
+                    ErrorLabel.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Оберіть дату народження!", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
     }
 }

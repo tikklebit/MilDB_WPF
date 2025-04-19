@@ -1,7 +1,7 @@
 ﻿<Window x:Name="MilDBMainWindow" x:Class="MilDB_WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="900" Width="1600"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
@@ -23,7 +23,7 @@
             <Grid>
                 <Border x:Name="TopMenuBorder" CornerRadius="20, 20, 0, 0" Height="25" VerticalAlignment="Top" Background="Black" MouseLeftButtonDown="DragWindow">
                     <Grid>
-                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="ТАБЛИЦЯ" Foreground="White"></Label>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="ТАБЛИЦЯ" Foreground="White"/>
                         <Border x:Name="CloseProgramButtonBorder" Width="40" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top">
                             <Button Width="40" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" BorderThickness="0" Click="CloseButton_Click" Style="{StaticResource TopBarButtonStyle}"/>
                         </Border>
@@ -33,27 +33,46 @@
                         </Border>
                     </Grid>
                 </Border>
+
+
             </Grid>
         </Border>
-
-        <Grid Margin="10, 30, 560, 10">
+        
+        <Grid Margin="20, 60, 1120, 20">
             <Border x:Name="ControlCenterBorder" CornerRadius="20, 0, 0, 20" Background="Azure">
                 <Grid>
-
-                    <Button x:Name="CreateObjectButton" VerticalAlignment="Top" Margin="20" Content="СТВОРИТИ" Style="{StaticResource GlobalButtonStyle}" Click="OpenSelectWindow_Click"/>
-                    <Button x:Name="Button2" VerticalAlignment="Top" Margin="20, 100, 20, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
-                    <Button x:Name="Button3" VerticalAlignment="Center" Margin="20, 0, 20, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
-                    <Button x:Name="Button4" VerticalAlignment="Bottom" Margin="20, 0, 20, 20" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
-                    <Button x:Name="Button5" VerticalAlignment="Bottom" Margin="20, 0, 20, 100" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="CreateObjectButton" VerticalAlignment="Top" Margin="40" Content="СТВОРИТИ" Style="{StaticResource GlobalButtonStyle}" Click="OpenSelectWindow_Click"/>
+                    <Button x:Name="UpdateTableButton" VerticalAlignment="Top" Margin="40, 120, 40, 0" Content="ОНОВИТИ ТАБЛИЦЮ" Style="{StaticResource GlobalButtonStyle}" Click="UpdateTableButton_Click"/>
+                    <Button x:Name="Увы" VerticalAlignment="Top" Margin="40, 200, 40, 0" Content="РЕДАГУВАТИ ІНФОРМАЦІЮ" Style="{StaticResource GlobalButtonStyle}" Click="ChangeInfoButton_Click"/>
+                    <Button x:Name="Button4" VerticalAlignment="Top" Margin="40, 280, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Button5" VerticalAlignment="Top" Margin="40, 360, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Button6" VerticalAlignment="Top" Margin="40, 440, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Button7" VerticalAlignment="Top" Margin="40, 520, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Button8" VerticalAlignment="Top" Margin="40, 600, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Button9" VerticalAlignment="Top" Margin="40, 680, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
                 </Grid>
             </Border>
         </Grid>
-
-        <Grid Margin="245, 30, 10, 10">
-            <Border x:Name="TableInfo" CornerRadius="0, 20, 20, 0" Background="Azure"></Border>
-            <Grid Margin="5, 5, 20, 5">
-
-            </Grid>
+        
+        <Grid Margin="490, 60, 20, 20">
+            <Border x:Name="TableInfo" CornerRadius="0, 20, 20, 0" Background="Azure">
+                <Grid>
+                    <Label Content="Таблиця призовників" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,70,0"/>
+                    <Grid Margin="10, 60, 70, 10">
+                        <DataGrid x:Name="DataGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding ID}" Width="100"/>
+                                <DataGridTextColumn Header="Призовник" Binding="{Binding FullName}" Width="*"/>
+                                <DataGridTextColumn Header="Дата народження" Binding="{Binding BirthDate}" Width="*"/>
+                                <DataGridTextColumn Header="Адреса проживання" Binding="{Binding Address}" Width="*"/>
+                                <DataGridTextColumn Header="Стан здоров'я" Binding="{Binding HealthStatus}" Width="*"/>
+                                <DataGridTextColumn Header="Категорія придатності" Binding="{Binding FitnessCategory}" Width="*"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>

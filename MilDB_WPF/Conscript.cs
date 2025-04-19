@@ -163,13 +163,13 @@ namespace MilDB_WPF
 
         public string GetCheck() => _check;
 
-        public void ShowConscript(out string? text, out string? text2, out string? text3)
-        {
-            string birthdate = $"{BirthDate.Year}.{BirthDate.Month}.{BirthDate.Day}";
-            text = $"{FullName}    Дата народження: {birthdate}    Адреса проживання: {Address}";
-            text2 = $"Стан здоров'я: {HealthStatus}";
-            text3 = $"Категорія придатності: {FitnessCategory}    Статус: {Status}";
-        }
+        //public void ShowConscript(out string? text, out string? text2, out string? text3)
+        //{
+        //    string birthdate = $"{BirthDate.Year}.{BirthDate.Month}.{BirthDate.Day}";
+        //    text = $"{FullName}    Дата народження: {birthdate}    Адреса проживання: {Address}";
+        //    text2 = $"Стан здоров'я: {HealthStatus}";
+        //    text3 = $"Категорія придатності: {FitnessCategory}    Статус: {Status}";
+        //}
     }
 
     internal class ConscriptList
@@ -214,16 +214,9 @@ namespace MilDB_WPF
 
         public void Deserialize()
         {
-            if (File.Exists(_file))
-            {
-                string jsonRead = File.ReadAllText(_file);
-                Conscripts.Clear();
-                Conscripts = JsonConvert.DeserializeObject<List<Conscript>>(jsonRead);
-            }
-            else
-            {
-                File.WriteAllText(_file, "[]");
-            }
+            string jsonRead = File.ReadAllText(_file);
+            Conscripts.Clear();
+            Conscripts = JsonConvert.DeserializeObject<List<Conscript>>(jsonRead);
         }
 
         public Conscript? GetConscriptByIndex(int index)
