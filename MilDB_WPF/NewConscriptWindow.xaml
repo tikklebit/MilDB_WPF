@@ -80,7 +80,7 @@
                         <ComboBox x:Name="StatusComboBox" Height="25" Foreground="Black" BorderBrush="#FF555555">
                             <ComboBoxItem Content="придатний"/>
                             <ComboBoxItem Content="відстрочка"/>
-                            <ComboBoxItem Content="звільнений"/>
+                            <ComboBoxItem Content="непридатний"/>
                         </ComboBox>
 
                     </StackPanel>

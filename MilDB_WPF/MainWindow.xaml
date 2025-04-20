@@ -43,8 +43,8 @@
                 <Grid>
                     <Button x:Name="CreateObjectButton" VerticalAlignment="Top" Margin="40" Content="СТВОРИТИ" Style="{StaticResource GlobalButtonStyle}" Click="OpenSelectWindow_Click"/>
                     <Button x:Name="UpdateTableButton" VerticalAlignment="Top" Margin="40, 120, 40, 0" Content="ОНОВИТИ ТАБЛИЦЮ" Style="{StaticResource GlobalButtonStyle}" Click="UpdateTableButton_Click"/>
-                    <Button x:Name="Увы" VerticalAlignment="Top" Margin="40, 200, 40, 0" Content="РЕДАГУВАТИ ІНФОРМАЦІЮ" Style="{StaticResource GlobalButtonStyle}" Click="ChangeInfoButton_Click"/>
-                    <Button x:Name="Button4" VerticalAlignment="Top" Margin="40, 280, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="Уви" VerticalAlignment="Top" Margin="40, 200, 40, 0" Content="РЕДАГУВАТИ ІНФОРМАЦІЮ" Style="{StaticResource GlobalButtonStyle}" Click="ChangeInfoButton_Click"/>
+                    <Button x:Name="Увинск" VerticalAlignment="Top" Margin="40, 280, 40, 0" Content="ВИДАЛИТИ З БАЗИ" Style="{StaticResource GlobalButtonStyle}" Click="DeleteButton_Click"/>
                     <Button x:Name="Button5" VerticalAlignment="Top" Margin="40, 360, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
                     <Button x:Name="Button6" VerticalAlignment="Top" Margin="40, 440, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
                     <Button x:Name="Button7" VerticalAlignment="Top" Margin="40, 520, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
@@ -59,11 +59,11 @@
                 <Grid>
                     <Label Content="Таблиця призовників" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,70,0"/>
                     <Grid Margin="10, 60, 70, 10">
-                        <DataGrid x:Name="DataGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False">
+                        <DataGrid x:Name="DataGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" IsReadOnly="True">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ID}" Width="100"/>
+                                <DataGridTextColumn Binding="{Binding ID}" Width="30"/>
                                 <DataGridTextColumn Header="Призовник" Binding="{Binding FullName}" Width="*"/>
-                                <DataGridTextColumn Header="Дата народження" Binding="{Binding BirthDate}" Width="*"/>
+                                <DataGridTextColumn Header="Дата народження" Binding="{Binding FormattedBirthDate}" Width="*"/>
                                 <DataGridTextColumn Header="Адреса проживання" Binding="{Binding Address}" Width="*"/>
                                 <DataGridTextColumn Header="Стан здоров'я" Binding="{Binding HealthStatus}" Width="*"/>
                                 <DataGridTextColumn Header="Категорія придатності" Binding="{Binding FitnessCategory}" Width="*"/>

@@ -67,7 +67,7 @@ namespace MilDB_WPF
             mainWindow.Show();
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
+        public void AddButton_Click(object sender, EventArgs e)
         {
             string name = FullNameTextBox.Text;
             DatePicker birthDate = BirthDatePicker;
@@ -84,8 +84,10 @@ namespace MilDB_WPF
                 {
                     ConscriptList conscriptList = new ConscriptList();
                     conscriptList.AddConscript(conscript);
-                    string greatMessage = conscript.GetCheck();
-                    ErrorLabel.Content = Visibility.Visible;
+                    string greatMessage = "Успішно додано!";
+                    ErrorLabel.Content = greatMessage;
+                    ErrorLabel.Foreground = new SolidColorBrush(Colors.Green);
+                    ErrorLabel.Visibility = Visibility.Visible;
                 }
                 else
                 {
