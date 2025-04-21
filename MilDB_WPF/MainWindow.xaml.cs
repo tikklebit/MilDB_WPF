@@ -3,6 +3,8 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media;
 using System.Windows;
+using System.IO;
+using Microsoft.Win32;
 
 namespace MilDB_WPF;
 
@@ -11,16 +13,19 @@ namespace MilDB_WPF;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private ConscriptList conscriptList;
+    private ConscriptList inFileConscriptList;
     private Conscript conscript;
+    private string _file = "conscripts.json";
+    private string openFile;
     static int index = 0;
 
     // Конструктор
     public MainWindow()
     {
         InitializeComponent();
-        conscriptList = new ConscriptList();
+        inFileConscriptList = new ConscriptList();
         conscript = new Conscript();
+        inFileConscriptList.Buffer();
         this.StateChanged += MainWindow_StateChanged;
         UpdateTableButton_Click(this, EventArgs.Empty);
     }
@@ -65,20 +70,26 @@ public partial class MainWindow : Window
     }
 
     // Методи для роботи з даними
+    private void SaveDataButton_Click(object sender, RoutedEventArgs e)
+    {
+        inFileConscriptList.Serialize();
+        DataGrid.ItemsSource = inFileConscriptList.Conscripts;
+        DataGrid.Items.Refresh();
+    }
+
     private void UpdateTableButton_Click(object sender, EventArgs e)
     {
-        conscriptList.Deserialize();
-        foreach (Conscript conscript in conscriptList.Conscripts)
-        {
-            DataGrid.ItemsSource = conscriptList.Conscripts;
-        }
+        inFileConscriptList.Deserialize();
+        DataGrid.ItemsSource = inFileConscriptList.Conscripts;
+        DataGrid.Items.Refresh();
+
     }
 
     private void ChangeInfoButton_Click(object sender, EventArgs e)
     {
         if (DataGrid.SelectedItem is Conscript selectedConscript)
         {
-            index = conscriptList.Conscripts.IndexOf(selectedConscript);
+            index = inFileConscriptList.Conscripts.IndexOf(selectedConscript);
             NewConscriptWindow newConscript = new NewConscriptWindow();
 
             newConscript.FullNameTextBox.Text = selectedConscript.FullName;
@@ -144,7 +155,7 @@ public partial class MainWindow : Window
     {
         if (DataGrid.SelectedItem is Conscript selectedConscript)
         {
-            conscriptList.RemoveConscript(selectedConscript);
+            inFileConscriptList.RemoveConscript(selectedConscript);
             UpdateTableButton_Click(this, EventArgs.Empty);
             DataGrid.Items.Refresh();
         }
@@ -157,25 +168,29 @@ public partial class MainWindow : Window
     // Методи сортування
     private void SortByNameButton_Click(object sender, RoutedEventArgs e)
     {
-        ConscriptList sorted = new ConscriptList();
-        sorted.Conscripts.Sort((x, y) => string.Compare(x.FullName, y.FullName));
-        DataGrid.ItemsSource = sorted.Conscripts;
+        inFileConscriptList.Conscripts.Sort((x, y) => string.Compare(x.FullName, y.FullName));
+        DataGrid.ItemsSource = inFileConscriptList.Conscripts;
         DataGrid.Items.Refresh();
     }
 
     private void SortByAdress_Click(object sender, RoutedEventArgs e)
     {
-        ConscriptList sorted = new ConscriptList();
-        sorted.Conscripts.Sort((x, y) => string.Compare(x.Address, y.Address));
-        DataGrid.ItemsSource = sorted.Conscripts;
+        inFileConscriptList.Conscripts.Sort((x, y) => string.Compare(x.Address, y.Address));
+        DataGrid.ItemsSource = inFileConscriptList.Conscripts;
         DataGrid.Items.Refresh();
     }
 
     private void SortByDate_Click(object sender, RoutedEventArgs e)
     {
-        ConscriptList sorted = new ConscriptList();
-        sorted.Conscripts.Sort((x, y) => DateTime.Compare(x.BirthDate, y.BirthDate));
-        DataGrid.ItemsSource = sorted.Conscripts;
+        inFileConscriptList.Conscripts.Sort((x, y) => DateTime.Compare(x.BirthDate, y.BirthDate));
+        DataGrid.ItemsSource = inFileConscriptList.Conscripts;
+        DataGrid.Items.Refresh();
+    }
+
+    private void SetDefault_Click(object sender, RoutedEventArgs e)
+    {
+        inFileConscriptList.Default();
+        DataGrid.ItemsSource = inFileConscriptList.Conscripts;
         DataGrid.Items.Refresh();
     }
 
@@ -188,6 +203,7 @@ public partial class MainWindow : Window
         SortComboBox.Items.Add("Сортувати за іменем та прізвищем");
         SortComboBox.Items.Add("Сортувати за адресою");
         SortComboBox.Items.Add("Сортувати за датою народження");
+        SortComboBox.Items.Add("Повернути дані за замовчуванням");
 
         SortComboBox.SelectedIndex = 0;
         SortComboBox.SelectionChanged += (s, e) =>
@@ -209,7 +225,79 @@ public partial class MainWindow : Window
                     SortComboBox.Visibility = Visibility.Collapsed;
                     SortTitle.Visibility = Visibility.Collapsed;
                     break;
+                case 4:
+                    SetDefault_Click(sender, e);
+                    SortComboBox.Visibility = Visibility.Collapsed;
+                    SortTitle.Visibility = Visibility.Collapsed;
+                    break;
+
             }
         };
+    }
+
+    // Збереження та відкриття файлу
+    private void SaveToFileButton_Click(object sender, RoutedEventArgs e)
+    {
+        SaveFileDialog saveFileDialog = new SaveFileDialog
+        {
+            Filter = "JSON файли (*.json)|*.json|Усі файли (*.*)|*.*",
+            DefaultExt = "json",
+            Title = "Зберегти файл"
+        };
+
+        if (saveFileDialog.ShowDialog() == true)
+        {
+            try
+            {
+                string filePath = saveFileDialog.FileName;
+                string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(inFileConscriptList.Conscripts, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(filePath, jsonData);
+                MessageBox.Show("Файл успішно збережено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка під час збереження файлу: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+    }
+
+    private void OpenFromFileButton_Click(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog
+        {
+            Filter = "JSON файли (*.json)|*.json|Усі файли (*.*)|*.*",
+            DefaultExt = "json",
+            Title = "Відкрити файл"
+        };
+
+        if (openFileDialog.ShowDialog() == true)
+        {
+            try
+            {
+                string filePath = openFileDialog.FileName;
+                openFile = Path.GetFileName(filePath);
+                Title.Content = $"ТАБЛИЦЯ - {openFile}";
+                string jsonData = File.ReadAllText(filePath);
+                var conscripts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Conscript>>(jsonData);
+
+                if (conscripts != null)
+                {
+                    inFileConscriptList.Conscripts = conscripts;
+                    DataGrid.ItemsSource = inFileConscriptList.Conscripts;
+                    DataGrid.Items.Refresh();
+
+                    string bufferFileJson = File.ReadAllText(_file);
+                    bufferFileJson = jsonData;
+                }
+                else
+                {
+                    MessageBox.Show("Файл не містить коректних даних.", "Попередження", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка під час відкриття файлу: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

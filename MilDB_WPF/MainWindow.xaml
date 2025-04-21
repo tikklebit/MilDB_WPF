@@ -23,7 +23,7 @@
             <Grid>
                 <Border x:Name="TopMenuBorder" CornerRadius="20, 20, 0, 0" Height="25" VerticalAlignment="Top" Background="Black" MouseLeftButtonDown="DragWindow">
                     <Grid>
-                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="ТАБЛИЦЯ" Foreground="White"/>
+                        <Label x:Name="Title" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ТАБЛИЦЯ" Foreground="White"/>
                         <Border x:Name="CloseProgramButtonBorder" Width="40" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top">
                             <Button Width="40" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" BorderThickness="0" Click="CloseButton_Click" Style="{StaticResource TopBarButtonStyle}"/>
                         </Border>
@@ -48,6 +48,8 @@
                     <Button x:Name="SortButton" VerticalAlignment="Top" Margin="40, 360, 40, 0" Content="СОРТУВАТИ" Style="{StaticResource GlobalButtonStyle}" Click="SortMenu"/>
                     <Label x:Name="SortTitle" VerticalAlignment="Center" Margin="40, 70, 40, 0" FontSize="25" Content="Сортувати за..." Visibility="Collapsed"/>
                     <ComboBox x:Name="SortComboBox" VerticalAlignment="Center" Margin="40, 130, 40, 0" Visibility="Collapsed"/>
+                    <Button Content="ЗБЕРЕГТИ" VerticalAlignment="Bottom" Margin="40, 0, 40, 40" Style="{StaticResource GlobalButtonStyle}" Click="SaveToFileButton_Click" />
+                    <Button Content="ВІДКРИТИ"  VerticalAlignment="Bottom" Margin="40, 0, 40, 120" Style="{StaticResource GlobalButtonStyle}" Click="OpenFromFileButton_Click" />
                 </Grid>
             </Border>
         </Grid>

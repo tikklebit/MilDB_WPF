@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ namespace MilDB_WPF
 {
     internal class Conscript
     {
+        // Властивості
         private string _fullName;
         private DateTime _birthDate;
         private string _address;
@@ -47,8 +49,7 @@ namespace MilDB_WPF
                         _fullNameValid = false;
                     }
                 }
-                if (_fullNameValid)
-                    _fullName = value;
+                if (_fullNameValid) _fullName = value;
             }
         }
 
@@ -66,10 +67,7 @@ namespace MilDB_WPF
                     _check += "\n✕ Дата народження повинна відповідати віку від 18 до 27 років.";
                     _birthDateValid = false;
                 }
-                else
-                {
-                    _birthDate = value;
-                }
+                else _birthDate = value;
             }
         }
 
@@ -84,8 +82,7 @@ namespace MilDB_WPF
                     _check += "\n✕ Адреса не може бути порожньою.";
                     _addressValid = false;
                 }
-                if (_addressValid)
-                    _address = value;
+                if (_addressValid) _address = value;
             }
         }
 
@@ -100,10 +97,7 @@ namespace MilDB_WPF
                     _check += "\n✕ Стан здоров'я не може бути порожнім.";
                     _healthStatusValid = false;
                 }
-                else
-                {
-                    _healthStatus = value;
-                }
+                else _healthStatus = value;
             }
         }
 
@@ -118,10 +112,7 @@ namespace MilDB_WPF
                     _check += "\n✕ Оберіть категорію придатності!";
                     _fitnessCategoryValid = false;
                 }
-                else
-                {
-                    _fitnessCategory = value;
-                }
+                else _fitnessCategory = value;
             }
         }
 
@@ -136,15 +127,13 @@ namespace MilDB_WPF
                     _check += "\n✕ Оберіть статус!";
                     _statusValid = false;
                 }
-                else
-                {
-                    _status = value;
-                }
+                else _status = value;
             }
         }
 
         public string FormattedBirthDate => $"{BirthDate.Year}.{BirthDate.Month:D2}.{BirthDate.Day:D2}";
 
+        // Конструктори
         public Conscript(string fullName, DateTime birthDate, string address, string healthStatus, string fitnessCategory, string status)
         {
             _check = null;
@@ -158,6 +147,7 @@ namespace MilDB_WPF
 
         public Conscript() { }
 
+        // Методи перевірки
         public bool Valid()
         {
             return _fullNameValid && _birthDateValid && _addressValid && _healthStatusValid && _fitnessCategoryValid && _statusValid;
@@ -166,30 +156,18 @@ namespace MilDB_WPF
         public string GetCheck() => _check;
     }
 
-    internal class ConscriptList : IComparable<ConscriptList>
+    internal class ConscriptList : IComparable<ConscriptList>, IEnumerable<Conscript>, IEnumerator<Conscript>
     {
-        public int CompareTo(ConscriptList? other)
-        {
-            if (other == null) return 1;
-            return 0;
-        }
-        public int CompareTo(object? obj)
-        {
-            if (obj is ConscriptList other)
-            {
-                return CompareTo(other);
-            }
-            throw new ArgumentException("Object is not a ConscriptList");
-        }
-
+        // Властивості
         private string _file = "conscripts.json";
         public List<Conscript> Conscripts { get; set; } = new List<Conscript>();
+        public List<Conscript> Buffered { get; set; } = new List<Conscript>();
+        private int _position = -1;
 
-        public ConscriptList()
-        {
-            Deserialize();
-        }
+        // Конструктор
+        public ConscriptList() => Deserialize();
 
+        // Методи для роботи зі списком
         public void AddConscript(Conscript conscript)
         {
             if (conscript.Valid())
@@ -214,6 +192,15 @@ namespace MilDB_WPF
             }
         }
 
+        public Conscript? GetConscriptByIndex(int index)
+        {
+            if (index >= 0 && index < Conscripts.Count) return Conscripts[index];
+            return null;
+        }
+
+        public int GetTableIndex(int index) => index;
+
+        // Методи для роботи з файлами
         public void Serialize()
         {
             string json = JsonConvert.SerializeObject(Conscripts, Formatting.Indented);
@@ -222,28 +209,49 @@ namespace MilDB_WPF
 
         public void Deserialize()
         {
-            if (!File.Exists(_file))
-            {
-                File.WriteAllText(_file, "[]");
-            }
+            if (!File.Exists(_file)) File.WriteAllText(_file, "[]");
 
             string jsonRead = File.ReadAllText(_file);
             Conscripts.Clear();
             Conscripts = JsonConvert.DeserializeObject<List<Conscript>>(jsonRead) ?? new List<Conscript>();
         }
 
-        public Conscript? GetConscriptByIndex(int index)
+        // Інтерфейс IComparable
+        public int CompareTo(ConscriptList? other)
         {
-            if (index >= 0 && index < Conscripts.Count)
-            {
-                return Conscripts[index];
-            }
-            return null;
+            if (other == null) return 1;
+            return 0;
         }
 
-        public int GetTableIndex(int index)
+        public int CompareTo(object? obj)
         {
-            return index;
+            if (obj is ConscriptList other) 
+            {
+                return CompareTo(other);
+            }
+            throw new ArgumentException("Об'єкт не відноситься до ConscriptList!");
         }
+
+        public void Buffer()
+        {
+            Buffered.Clear();
+            foreach (var conscript in Conscripts)
+            {
+                Buffered.Add(conscript);
+            }
+        }
+
+        public void Default() => Conscripts = Buffered;
+
+        // Інтерфейс IEnumerable
+        public IEnumerator<Conscript> GetEnumerator() => this;
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        // Інтерфейс IEnumerator
+        public Conscript Current => Conscripts[_position];
+        object IEnumerator.Current => Current;
+        public bool MoveNext() => ++_position < Conscripts.Count;
+        public void Reset() => _position = -1;
+        public void Dispose() {}
     }
 }
