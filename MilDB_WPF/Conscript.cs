@@ -166,8 +166,22 @@ namespace MilDB_WPF
         public string GetCheck() => _check;
     }
 
-    internal class ConscriptList
+    internal class ConscriptList : IComparable<ConscriptList>
     {
+        public int CompareTo(ConscriptList? other)
+        {
+            if (other == null) return 1;
+            return 0;
+        }
+        public int CompareTo(object? obj)
+        {
+            if (obj is ConscriptList other)
+            {
+                return CompareTo(other);
+            }
+            throw new ArgumentException("Object is not a ConscriptList");
+        }
+
         private string _file = "conscripts.json";
         public List<Conscript> Conscripts { get; set; } = new List<Conscript>();
 

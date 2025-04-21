@@ -37,7 +37,7 @@
 
             </Grid>
         </Border>
-        
+
         <Grid Margin="20, 60, 1120, 20">
             <Border x:Name="ControlCenterBorder" CornerRadius="20, 0, 0, 20" Background="Azure">
                 <Grid>
@@ -45,15 +45,13 @@
                     <Button x:Name="UpdateTableButton" VerticalAlignment="Top" Margin="40, 120, 40, 0" Content="ОНОВИТИ ТАБЛИЦЮ" Style="{StaticResource GlobalButtonStyle}" Click="UpdateTableButton_Click"/>
                     <Button x:Name="Уви" VerticalAlignment="Top" Margin="40, 200, 40, 0" Content="РЕДАГУВАТИ ІНФОРМАЦІЮ" Style="{StaticResource GlobalButtonStyle}" Click="ChangeInfoButton_Click"/>
                     <Button x:Name="Увинск" VerticalAlignment="Top" Margin="40, 280, 40, 0" Content="ВИДАЛИТИ З БАЗИ" Style="{StaticResource GlobalButtonStyle}" Click="DeleteButton_Click"/>
-                    <Button x:Name="Button5" VerticalAlignment="Top" Margin="40, 360, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
-                    <Button x:Name="Button6" VerticalAlignment="Top" Margin="40, 440, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
-                    <Button x:Name="Button7" VerticalAlignment="Top" Margin="40, 520, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
-                    <Button x:Name="Button8" VerticalAlignment="Top" Margin="40, 600, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
-                    <Button x:Name="Button9" VerticalAlignment="Top" Margin="40, 680, 40, 0" Content="НОВА КНОПКА" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button x:Name="SortButton" VerticalAlignment="Top" Margin="40, 360, 40, 0" Content="СОРТУВАТИ" Style="{StaticResource GlobalButtonStyle}" Click="SortMenu"/>
+                    <Label x:Name="SortTitle" VerticalAlignment="Center" Margin="40, 70, 40, 0" FontSize="25" Content="Сортувати за..." Visibility="Collapsed"/>
+                    <ComboBox x:Name="SortComboBox" VerticalAlignment="Center" Margin="40, 130, 40, 0" Visibility="Collapsed"/>
                 </Grid>
             </Border>
         </Grid>
-        
+
         <Grid Margin="490, 60, 20, 20">
             <Border x:Name="TableInfo" CornerRadius="0, 20, 20, 0" Background="Azure">
                 <Grid>
