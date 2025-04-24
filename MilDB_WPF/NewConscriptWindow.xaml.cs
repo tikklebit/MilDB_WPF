@@ -23,7 +23,7 @@ namespace MilDB_WPF
         public NewConscriptWindow()
         {
             InitializeComponent();
-            this.StateChanged += MainWindow_StateChanged;
+            StateChanged += MainWindow_StateChanged;
         }
 
         private void DragWindow(object sender, MouseButtonEventArgs e)
@@ -37,7 +37,10 @@ namespace MilDB_WPF
             var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
             this.BeginAnimation(OpacityProperty, fadeOut);
             await Task.Delay(100);
-            Application.Current.Shutdown();
+
+            this.Hide();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
 
         private async void HideButton_Click(object sender, RoutedEventArgs e)

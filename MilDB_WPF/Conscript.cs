@@ -24,7 +24,6 @@ namespace MilDB_WPF
         private bool _statusValid = true;
 
         public string? _check = null;
-
         public string FullName
         {
             get => _fullName;
@@ -156,13 +155,12 @@ namespace MilDB_WPF
         public string GetCheck() => _check;
     }
 
-    internal class ConscriptList : IComparable<ConscriptList>, IEnumerable<Conscript>, IEnumerator<Conscript>
+    internal class ConscriptList
     {
         // Властивості
         private string _file = "conscripts.json";
         public List<Conscript> Conscripts { get; set; } = new List<Conscript>();
         public List<Conscript> Buffered { get; set; } = new List<Conscript>();
-        private int _position = -1;
 
         // Конструктор
         public ConscriptList() => Deserialize();
@@ -215,43 +213,5 @@ namespace MilDB_WPF
             Conscripts.Clear();
             Conscripts = JsonConvert.DeserializeObject<List<Conscript>>(jsonRead) ?? new List<Conscript>();
         }
-
-        // Інтерфейс IComparable
-        public int CompareTo(ConscriptList? other)
-        {
-            if (other == null) return 1;
-            return 0;
-        }
-
-        public int CompareTo(object? obj)
-        {
-            if (obj is ConscriptList other) 
-            {
-                return CompareTo(other);
-            }
-            throw new ArgumentException("Об'єкт не відноситься до ConscriptList!");
-        }
-
-        public void Buffer()
-        {
-            Buffered.Clear();
-            foreach (var conscript in Conscripts)
-            {
-                Buffered.Add(conscript);
-            }
-        }
-
-        public void Default() => Conscripts = Buffered;
-
-        // Інтерфейс IEnumerable
-        public IEnumerator<Conscript> GetEnumerator() => this;
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        // Інтерфейс IEnumerator
-        public Conscript Current => Conscripts[_position];
-        object IEnumerator.Current => Current;
-        public bool MoveNext() => ++_position < Conscripts.Count;
-        public void Reset() => _position = -1;
-        public void Dispose() {}
     }
 }
