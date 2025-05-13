@@ -216,6 +216,9 @@ public partial class MainWindow : Window
         sortAndFiltredWindow.ShowDialog();
     }
 
+    // Методи фільтрації
+    
+
     // Методи збереження та відкриття файлу
     private void SaveToFileButton_Click(object sender, RoutedEventArgs e)
     {

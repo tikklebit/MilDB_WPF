@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MilDB_WPF.dialoges"
+        xmlns:local="clr-namespace:MilDB_WPF"
         mc:Ignorable="d"
         Title="SortAndFiltred" Height="450" Width="800"
         AllowsTransparency="True"
@@ -102,15 +102,15 @@
 
                 <Grid>
                     <Label Content="Фільтрування" Foreground="Black" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10"/>
-                    <TextBox x:Name="FilterBDate" PreviewTextInput="FilterBDate_PriviewTextInput" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,70,40,0"/>
-                    <ComboBox x:Name="FilterCategory" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,130,40,0">
+                    <TextBox x:Name="FilterBDate" local:PlaceholderService.Placeholder="Введіть рік народження для фільтрації" PreviewTextInput="FilterBDate_PriviewTextInput" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,70,40,0"/>
+                    <ComboBox x:Name="FilterCategory" IsEditable="True" local:PlaceholderService.Placeholder="Категорія" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,130,40,0">
                         <ComboBoxItem Content="А"/>
                         <ComboBoxItem Content="Б"/>
                         <ComboBoxItem Content="В"/>
                         <ComboBoxItem Content="Г"/>
                         <ComboBoxItem Content="Д"/>
                     </ComboBox>
-                    <ComboBox x:Name="FilterStatus" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,190,40,0">
+                    <ComboBox x:Name="FilterStatus" IsEditable="True" local:PlaceholderService.Placeholder="Статус" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,190,40,0">
                         <ComboBoxItem Content="Придатний"/>
                         <ComboBoxItem Content="Відстрочка"/>
                         <ComboBoxItem Content="Непридатний"/>

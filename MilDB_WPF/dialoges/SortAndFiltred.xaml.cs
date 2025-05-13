@@ -26,10 +26,11 @@ namespace MilDB_WPF.dialoges
 
         private async void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
+            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
             this.BeginAnimation(OpacityProperty, fadeOut);
-            await Task.Delay(100);
-            Application.Current.Shutdown();
+            await Task.Delay(300);
+
+            this.Hide();
         }
 
         private async void HideButton_Click(object sender, RoutedEventArgs e)
