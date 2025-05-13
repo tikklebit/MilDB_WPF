@@ -167,28 +167,30 @@ public partial class MainWindow : Window
     }
 
     // Методи сортування
-    private void SortByNameButton_Click(object sender, RoutedEventArgs e)
+    public void SortByNameButton_Click(object sender, RoutedEventArgs e)
     {
         originalConscripts.Sort((x, y) => string.Compare(x.FullName, y.FullName));
         DataGrid.ItemsSource = originalConscripts;
         DataGrid.Items.Refresh();
     }
 
-    private void SortByAdress_Click(object sender, RoutedEventArgs e)
+    public void SortByAdress_Click(object sender, RoutedEventArgs e)
     {
         originalConscripts.Sort((x, y) => string.Compare(x.Address, y.Address));
         DataGrid.ItemsSource = originalConscripts;
         DataGrid.Items.Refresh();
     }
 
-    private void SortByDate_Click(object sender, RoutedEventArgs e)
+    public void SortByDate_Click(object sender, RoutedEventArgs e)
     {
         originalConscripts.Sort((x, y) => DateTime.Compare(x.BirthDate, y.BirthDate));
         DataGrid.ItemsSource = originalConscripts;
         DataGrid.Items.Refresh();
     }
+    
 
-    private void SetDefault_Click(object sender, RoutedEventArgs e)
+
+    public void SetDefault_Click(object sender, RoutedEventArgs e)
     {
         if (originalConscripts != null)
         {
@@ -204,43 +206,14 @@ public partial class MainWindow : Window
 
     private void SortMenu(object sender, RoutedEventArgs e)
     {
-        SortComboBox.Items.Clear();
-        SortComboBox.Visibility = Visibility.Visible;
-        SortTitle.Visibility = Visibility.Visible;
-        SortComboBox.Items.Add("Сортувати...");
-        SortComboBox.Items.Add("Сортувати за іменем та прізвищем");
-        SortComboBox.Items.Add("Сортувати за адресою");
-        SortComboBox.Items.Add("Сортувати за датою народження");
-        SortComboBox.Items.Add("Повернути дані за замовчуванням");
+        var sortAndFiltredWindow = new dialoges.SortAndFiltred();
 
-        SortComboBox.SelectedIndex = 0;
-        SortComboBox.SelectionChanged += (s, e) =>
-        {
-            switch (SortComboBox.SelectedIndex)
-            {
-                case 1:
-                    SortByNameButton_Click(sender, e);
-                    SortComboBox.Visibility = Visibility.Collapsed;
-                    SortTitle.Visibility = Visibility.Collapsed;
-                    break;
-                case 2:
-                    SortByAdress_Click(sender, e);
-                    SortComboBox.Visibility = Visibility.Collapsed;
-                    SortTitle.Visibility = Visibility.Collapsed;
-                    break;
-                case 3:
-                    SortByDate_Click(sender, e);
-                    SortComboBox.Visibility = Visibility.Collapsed;
-                    SortTitle.Visibility = Visibility.Collapsed;
-                    break;
-                case 4:
-                    SetDefault_Click(sender, e);
-                    SortComboBox.Visibility = Visibility.Collapsed;
-                    SortTitle.Visibility = Visibility.Collapsed;
-                    break;
+        sortAndFiltredWindow.SortByNameAndSurname.Click += (s, args) => { SortByNameButton_Click(sender, args); sortAndFiltredWindow.Close(); };
+        sortAndFiltredWindow.SortByAddress.Click += (s, args) => { SortByAdress_Click(sender, args); sortAndFiltredWindow.Close(); };
+        sortAndFiltredWindow.SortByBDate.Click += (s, args) => { SortByDate_Click(sender, args); sortAndFiltredWindow.Close(); };
+        sortAndFiltredWindow.DefoltInfoS.Click += (s, args) => { SetDefault_Click(sender, args); sortAndFiltredWindow.Close(); };
 
-            }
-        };
+        sortAndFiltredWindow.ShowDialog();
     }
 
     // Методи збереження та відкриття файлу

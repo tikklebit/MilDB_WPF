@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Name="MilDBMainWindow"
     Title="MainWindow"
-    Width="1600"
-    Height="900"
+    Width="1293"
+    Height="689"
     AllowsTransparency="True"
     Background="Transparent"
     WindowStyle="None">
@@ -78,8 +78,6 @@
                         </Border>
                     </Grid>
                 </Border>
-
-
             </Grid>
         </Border>
 
@@ -87,7 +85,7 @@
             <Border
                 x:Name="ControlCenterBorder"
                 Background="Azure"
-                CornerRadius="20, 0, 0, 20">
+                CornerRadius="20, 0, 0, 20" Margin="0,0,-300,0">
                 <Grid>
                     <Button
                         x:Name="CreateObjectButton"
