@@ -4,3 +4,7 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 .vs/
+.vs/MilDB_WPF/v17/DocumentLayout.backup.json
+.vs/MilDB_WPF/v17/DocumentLayout.json
+.vs/MilDB_WPF/v17/DocumentLayout.backup.json
+/.vs
