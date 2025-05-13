@@ -84,6 +84,10 @@ public partial class MainWindow : Window
         originalConscripts = new List<Conscript>(inFileConscriptList.Conscripts);
         DataGrid.ItemsSource = inFileConscriptList.Conscripts;
         DataGrid.Items.Refresh();
+        
+        if(openFile != null) Title.Content = openFile;
+        else Title.Content = "Новий файл";
+         
     }
 
     private void ChangeInfoButton_Click(object sender, EventArgs e)

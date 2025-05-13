@@ -102,15 +102,20 @@
 
                 <Grid>
                     <Label Content="Фільтрування" Foreground="Black" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10"/>
-                    <TextBox x:Name="FilterBDate" local:PlaceholderService.Placeholder="Введіть рік народження для фільтрації" PreviewTextInput="FilterBDate_PriviewTextInput" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,70,40,0"/>
-                    <ComboBox x:Name="FilterCategory" IsEditable="True" local:PlaceholderService.Placeholder="Категорія" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,130,40,0">
+                    <Label Content="Фільтрація за роком" Foreground="Black" VerticalAlignment="Top" Margin="40, 70, 40, 0"/>
+                    <TextBox x:Name="FilterBDate" PreviewTextInput="FilterBDate_PriviewTextInput" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="200,70,40,0"/>
+                    
+                    <Label Content="Фільтрація за категорією" Foreground="Black" VerticalAlignment="Top" Margin="40, 130, 40, 0"/>
+                    <ComboBox x:Name="FilterCategory" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="200,130,40,0">
                         <ComboBoxItem Content="А"/>
                         <ComboBoxItem Content="Б"/>
                         <ComboBoxItem Content="В"/>
                         <ComboBoxItem Content="Г"/>
                         <ComboBoxItem Content="Д"/>
                     </ComboBox>
-                    <ComboBox x:Name="FilterStatus" IsEditable="True" local:PlaceholderService.Placeholder="Статус" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="40,190,40,0">
+                    
+                    <Label Content="Фільтрація за статусом" Foreground="Black" VerticalAlignment="Top" Margin="40, 190, 40, 0"/>
+                    <ComboBox x:Name="FilterStatus" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="200,190,40,0">
                         <ComboBoxItem Content="Придатний"/>
                         <ComboBoxItem Content="Відстрочка"/>
                         <ComboBoxItem Content="Непридатний"/>
