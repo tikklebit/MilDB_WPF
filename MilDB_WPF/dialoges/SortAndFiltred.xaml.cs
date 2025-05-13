@@ -1,19 +1,22 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Windows.Media;
-using System.Windows;
-using System.IO;
-using Microsoft.Win32;
-using System.Windows.Media.Imaging;
+using System.Text.RegularExpressions;
 
 namespace MilDB_WPF.dialoges
 {
     public partial class SortAndFiltred : Window
     {
+        public int? FilterYear { get; private set; }
+        public string? FilterCategoryText { get; private set; }
+        public string? FilterStatusText { get; private set; }
+
         public SortAndFiltred()
         {
             InitializeComponent();
+            this.StateChanged += SortAndFiltred_StateChanged;
         }
 
         private void DragWindow(object sender, MouseButtonEventArgs e)
@@ -30,7 +33,8 @@ namespace MilDB_WPF.dialoges
             this.BeginAnimation(OpacityProperty, fadeOut);
             await Task.Delay(300);
 
-            this.Hide();
+            this.DialogResult = false;
+            this.Close();
         }
 
         private async void HideButton_Click(object sender, RoutedEventArgs e)
@@ -41,7 +45,7 @@ namespace MilDB_WPF.dialoges
             WindowState = WindowState.Minimized;
         }
 
-        private void MainWindow_StateChanged(object sender, EventArgs e)
+        private void SortAndFiltred_StateChanged(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Normal)
             {
@@ -50,16 +54,28 @@ namespace MilDB_WPF.dialoges
             }
         }
 
+        private void AcceptF_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(FilterBDate.Text) && int.TryParse(FilterBDate.Text.Trim(), out int year))
+            {
+                FilterYear = year;
+            }
+            else
+            {
+                FilterYear = null;
+            }
+
+            FilterCategoryText = (FilterCategory.SelectedItem as ComboBoxItem)?.Content?.ToString();
+            FilterStatusText = (FilterStatus.SelectedItem as ComboBoxItem)?.Content?.ToString();
+
+            this.DialogResult = true;
+            this.Close();
+        }
+
         private void FilterBDate_PriviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            foreach( char c in e.Text)
-            {
-                if (!char.IsDigit(c))
-                {
-                    e.Handled = true;
-                    return;
-                }
-            }
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

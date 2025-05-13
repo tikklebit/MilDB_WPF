@@ -116,11 +116,11 @@
                     
                     <Label Content="Фільтрація за статусом" Foreground="Black" VerticalAlignment="Top" Margin="40, 190, 40, 0"/>
                     <ComboBox x:Name="FilterStatus" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="200,190,40,0">
-                        <ComboBoxItem Content="Придатний"/>
-                        <ComboBoxItem Content="Відстрочка"/>
-                        <ComboBoxItem Content="Непридатний"/>
+                        <ComboBoxItem Content="придатний"/>
+                        <ComboBoxItem Content="відстрочка"/>
+                        <ComboBoxItem Content="непридатний"/>
                     </ComboBox>
-                    <Button x:Name="AcceptF" Content="Застосувати" Style="{StaticResource GlobalButtonStyle}" VerticalAlignment="Top" Margin="40,240,40,0"/>
+                    <Button x:Name="AcceptF" Content="Застосувати" Style="{StaticResource GlobalButtonStyle}" VerticalAlignment="Top" Margin="40,240,40,0" Click="AcceptF_Click"/>
                 </Grid>
             </Border>
         </Grid>
