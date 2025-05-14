@@ -12,7 +12,7 @@ namespace MilDB_WPF
         public Select()
         {
             InitializeComponent();
-            this.StateChanged += MainWindow_StateChanged;
+            this.StateChanged += Select_StateChanged;
         }
 
         private void DragWindow(object sender, MouseButtonEventArgs e)
@@ -39,7 +39,7 @@ namespace MilDB_WPF
             await Task.Delay(100);
             WindowState = WindowState.Minimized;
         }
-        private void MainWindow_StateChanged(object sender, EventArgs e)
+        private void Select_StateChanged(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Normal)
             {

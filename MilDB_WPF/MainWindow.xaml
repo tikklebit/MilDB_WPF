@@ -157,6 +157,7 @@
                     <Grid Margin="10,10,10,100">
                         <DataGrid
                             x:Name="DataGrid"
+                            Style="{StaticResource GlobalDataGridStyle}"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
                             CanUserDeleteRows="False"
@@ -195,7 +196,7 @@
                     </Grid>
                     
                     <Label Content="Пошук за іменем та прізвищем" FontSize="15" Margin="10, 515, 10, 60"></Label>
-                    <TextBox Margin="10, 560, 10, 25" x:Name="SearchTextBox" TextChanged="SearchTextBox_TextChanged"></TextBox>
+                    <TextBox Margin="10, 555, 10, 10" x:Name="SearchTextBox" Style="{StaticResource GlobalTextBoxStyle}" Background="White" Foreground="Black" TextChanged="SearchTextBox_TextChanged"></TextBox>
                 </Grid>
             </Border>
         </Grid>

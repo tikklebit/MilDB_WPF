@@ -23,7 +23,7 @@ namespace MilDB_WPF
         public NewConscriptWindow()
         {
             InitializeComponent();
-            StateChanged += MainWindow_StateChanged;
+            StateChanged += NCW_StateChanged;
         }
 
         private void DragWindow(object sender, MouseButtonEventArgs e)
@@ -50,7 +50,7 @@ namespace MilDB_WPF
             await Task.Delay(100);
             WindowState = WindowState.Minimized;
         }
-        private void MainWindow_StateChanged(object sender, EventArgs e)
+        private void NCW_StateChanged(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Normal)
             {

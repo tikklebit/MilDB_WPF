@@ -1,0 +1,13 @@
+<Window x:Class="MilDB_WPF.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:MilDB_WPF"
+        mc:Ignorable="d"
+        Title="Menu" Height="450" Width="800">
+    <Grid>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Адмін" Click="AdminButton_Click"/>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 50, 0, 0" Content="Користувач"/>
+    </Grid>
+</Window>
