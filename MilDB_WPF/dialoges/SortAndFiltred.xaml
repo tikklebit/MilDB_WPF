@@ -8,7 +8,8 @@
         Title="SortAndFiltred" Height="450" Width="800"
         AllowsTransparency="True"
         Background="Transparent"
-        WindowStyle="None">
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -26,55 +27,55 @@
     
     <Grid>
         <Border
-    x:Name="BGBorder"
-    Background="#FF2E2E2E"
-    CornerRadius="20"
-    Opacity="0.95">
+            x:Name="BGBorder"
+            Background="#FF2E2E2E"
+            CornerRadius="20"
+            Opacity="0.95">
             <Grid>
                 <Border
-            x:Name="TopMenuBorder"
-            Height="25"
-            VerticalAlignment="Top"
-            Background="Black"
-            CornerRadius="20, 20, 0, 0"
-            MouseLeftButtonDown="DragWindow">
+                    x:Name="TopMenuBorder"
+                    Height="25"
+                    VerticalAlignment="Top"
+                    Background="Black"
+                    CornerRadius="20, 20, 0, 0"
+                    MouseLeftButtonDown="DragWindow">
                     <Grid>
                         <Label
-                    x:Name="Title"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Content="Сортування та фільтри"
-                    Foreground="White" />
+                            x:Name="Title"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="Сортування та фільтри"
+                            Foreground="White" />
                         <Border
-                    x:Name="CloseProgramButtonBorder"
-                    Width="40"
-                    Height="25"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top">
+                            x:Name="CloseProgramButtonBorder"
+                            Width="40"
+                            Height="25"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top">
                             <Button
-                        Width="40"
-                        Height="25"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        BorderThickness="0"
-                        Click="CloseButton_Click"
-                        Style="{StaticResource TopBarButtonStyle}" />
+                                Width="40"
+                                Height="25"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                BorderThickness="0"
+                                Click="CloseButton_Click"
+                                Style="{StaticResource TopBarButtonStyle}" />
                         </Border>
 
                         <Border
-                    x:Name="HideButtonBorder"
-                    Width="40"
-                    Height="25"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
+                            x:Name="HideButtonBorder"
+                            Width="40"
+                            Height="25"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
                             <Button
-                        Width="40"
-                        Height="25"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        BorderThickness="0"
-                        Click="HideButton_Click"
-                        Style="{StaticResource HideTopBarButtonStyle}" />
+                                Width="40"
+                                Height="25"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                BorderThickness="0"
+                                Click="HideButton_Click"
+                                Style="{StaticResource HideTopBarButtonStyle}" />
                         </Border>
                     </Grid>
                 </Border>
@@ -103,7 +104,7 @@
                 <Grid>
                     <Label Content="Фільтрування" Foreground="Black" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10"/>
                     <Label Content="Фільтрація за роком" Foreground="Black" VerticalAlignment="Top" Margin="40, 70, 40, 0"/>
-                    <TextBox x:Name="FilterBDate" PreviewTextInput="FilterBDate_PriviewTextInput" Style="{StaticResource GlobalTextBoxStyle}" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="200,70,40,0"/>
+                    <TextBox x:Name="FilterBDate" PreviewTextInput="FilterBDate_PriviewTextInput" Style="{StaticResource GlobalTextBoxStyle}" VerticalAlignment="Top" Margin="200,70,40,0"/>
                     
                     <Label Content="Фільтрація за категорією" Foreground="Black" VerticalAlignment="Top" Margin="40, 130, 40, 0"/>
                     <ComboBox x:Name="FilterCategory" Height="25" BorderBrush="#FF555555" VerticalAlignment="Top" Margin="200,130,40,0">
