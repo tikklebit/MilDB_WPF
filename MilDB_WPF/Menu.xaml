@@ -5,7 +5,7 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:local="clr-namespace:MilDB_WPF"
                 mc:Ignorable="d"
-                Title="Menu" Height="300" Width="600"
+                Title="Menu" Height="200" Width="300"
                 WindowStyle="None"
                 AllowsTransparency="True"
                 Background="Transparent"

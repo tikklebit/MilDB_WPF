@@ -104,8 +104,9 @@
 
                         <Label Content="Категорія придатності:" Foreground="White" Margin="0,10,0,5"/>
                         <ComboBox
-                            x:Name="FitnessCategoryComboBox"
-                            Height="30" Foreground="White" Background="#2A2A2A" BorderBrush="#505050" BorderThickness="1"> <ComboBoxItem Content="А"/>
+                            x:Name="FitnessCategoryComboBox" Style="{StaticResource GlobalComboBoxStyle}"
+                            Height="30" Foreground="White" Background="#2A2A2A" BorderBrush="#505050" BorderThickness="1"> 
+                            <ComboBoxItem Content="А"/>
                             <ComboBoxItem Content="Б"/>
                             <ComboBoxItem Content="В"/>
                             <ComboBoxItem Content="Г"/>
@@ -114,8 +115,9 @@
 
                         <Label Content="Статус:" Foreground="White" Margin="0,10,0,5"/>
                          <ComboBox
-                            x:Name="StatusComboBox"
-                            Height="30" Foreground="White" Background="#2A2A2A" BorderBrush="#505050" BorderThickness="1"> <ComboBoxItem Content="придатний"/>
+                            x:Name="StatusComboBox" Style="{StaticResource GlobalComboBoxStyle}"
+                            Height="30" Foreground="White" Background="#2A2A2A" BorderBrush="#505050" BorderThickness="1"> 
+                             <ComboBoxItem Content="придатний"/>
                             <ComboBoxItem Content="відстрочка"/>
                             <ComboBoxItem Content="непридатний"/>
                         </ComboBox>

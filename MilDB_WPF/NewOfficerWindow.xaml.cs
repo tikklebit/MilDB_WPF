@@ -103,6 +103,25 @@ public partial class NewOfficerWindow : Window
 
     public void AddButton_Click(object sender, EventArgs e)
     {
-        
+        string name = FullNameTextBox.Text;
+        string rank = RankComboBox.Text;
+        int yearsOfService = int.Parse(YearsOfServiceTextBox.Text);
+
+        Officer officer = new Officer(name, rank, yearsOfService);
+        if (officer.Valid())
+        {
+            OfficerList officerList = new OfficerList();
+            officerList.AddOfficer(officer);
+            string greatMessage = "Успішно додано!";
+            ErrorLabel.Content = greatMessage;
+            ErrorLabel.Foreground = new SolidColorBrush(Colors.Green);
+            ErrorLabel.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            string errorMessage = officer.GetCheck();
+            ErrorLabel.Content = errorMessage;
+            ErrorLabel.Visibility = Visibility.Visible;
+        }
     }
 }

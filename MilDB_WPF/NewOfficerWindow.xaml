@@ -92,7 +92,7 @@
                         <ComboBox x:Name="RankComboBox" Style="{StaticResource GlobalComboBoxStyle}"/>
                         
                         <Label Content="Стаж:" Foreground="White" Margin="0,10,0,5"/>
-                        <TextBox x:Name="YearsPfService" Style="{StaticResource GlobalTextBoxStyle}"/>
+                        <TextBox x:Name="YearsOfServiceTextBox" Style="{StaticResource GlobalTextBoxStyle}"/>
                         
                         <Label Content="Призначений призовник:" Foreground="White" Margin="0,10,0,5"/>
                         <ComboBox x:Name="ConscriptComboBox" Style="{StaticResource GlobalComboBoxStyle}"/>
