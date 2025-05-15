@@ -1,141 +1,54 @@
-using System.IO;
-using Newtonsoft.Json;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MilDB_WPF;
 
-internal class MilitaryOffice
+public class MilitaryOffice
+{
+    public string Name { get; set; }
+    public string Address { get; set; }
+    public string ServiceArea { get; set; }
+    public ObservableCollection<Conscript> Conscripts { get; set; }
+    public ObservableCollection<Officer> Officers { get; set; }
+
+    public MilitaryOffice()
     {
-        // Властивості
-        private string _name;
-        private string _address;
-        private string _serviceArea;
-        private ConscriptList _conscripts;
-        private OfficerList _officers;
-
-        private bool _nameValid = true;
-        private bool _addressValid = true;
-        private bool _serviceAreaValid = true;
-
-        public string? _check = null;
-
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _nameValid = true;
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    _check += "✕ Назва військкомату не може бути порожньою.";
-                    _nameValid = false;
-                }
-                else _name = value;
-            }
-        }
-
-        public string Address
-        {
-            get => _address;
-            set
-            {
-                _addressValid = true;
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    _check += "\n✕ Адреса не може бути порожньою.";
-                    _addressValid = false;
-                }
-                else _address = value;
-            }
-        }
-
-        public string ServiceArea
-        {
-            get => _serviceArea;
-            set
-            {
-                _serviceAreaValid = true;
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    _check += "\n✕ Район обслуговування не може бути порожнім.";
-                    _serviceAreaValid = false;
-                }
-                else _serviceArea = value;
-            }
-        }
-
-        public ConscriptList Conscripts
-        {
-            get => _conscripts;
-            private set => _conscripts = value;
-        }
-
-        public OfficerList Officers
-        {
-            get => _officers;
-            private set => _officers = value;
-        }
-
-        // Конструктори
-        public MilitaryOffice(string name, string address, string serviceArea)
-        {
-            _check = null;
-            Name = name;
-            Address = address;
-            ServiceArea = serviceArea;
-            Conscripts = new ConscriptList();
-            Officers = new OfficerList();
-        }
-
-        public MilitaryOffice()
-        {
-            Conscripts = new ConscriptList();
-            Officers = new OfficerList();
-        }
-
-        // Методи
-        public List<Conscript> GetConscriptsList() => Conscripts.Conscripts;
-
-        public List<Officer> GetOfficersList() => Officers.Officers;
-
-        public bool Valid()
-        {
-            return _nameValid && _addressValid && _serviceAreaValid;
-        }
-
-        public string GetCheck() => _check;
-
-        // Методи пошуку
-        public List<Conscript> FindConscriptsByFitnessCategory(string category)
-        {
-            return Conscripts.Conscripts.FindAll(c => c.FitnessCategory == category);
-        }
-
-        public List<Conscript> FindConscriptsByStatus(string status)
-        {
-            return Conscripts.Conscripts.FindAll(c => c.Status == status);
-        }
-
-        public List<Conscript> FindConscriptsByAddress(string addressPart)
-        {
-            return Conscripts.Conscripts.FindAll(c => c.Address.Contains(addressPart));
-        }
-
-        public List<Officer> FindOfficersByRank(string rank)
-        {
-            return Officers.Officers.FindAll(o => o.Rank == rank);
-        }
-
-        public List<Officer> FindOfficersByYearsOfService(int minYears, int maxYears)
-        {
-            return Officers.Officers.FindAll(o => o.YearsOfService >= minYears && o.YearsOfService <= maxYears);
-        }
-
-        // Методи для зв'язування призовників з офіцерами
-        public void AssignOfficerToConscript(Officer officer, Conscript conscript)
-        {
-            if (officer != null && conscript != null)
-            {
-                officer.AssignConscript(conscript);
-            }
-        }
+        Name = string.Empty;
+        Address = string.Empty;
+        ServiceArea = string.Empty;
+        Conscripts = new ObservableCollection<Conscript>();
+        Officers = new ObservableCollection<Officer>();
     }
+
+    public MilitaryOffice(string name, string address, string serviceArea)
+    {
+        Name = name;
+        Address = address;
+        ServiceArea = serviceArea;
+        Conscripts = new ObservableCollection<Conscript>();
+        Officers = new ObservableCollection<Officer>();
+    }
+
+    public bool Valid()
+    {
+        return !string.IsNullOrWhiteSpace(Name)
+            && !string.IsNullOrWhiteSpace(Address)
+            && !string.IsNullOrWhiteSpace(ServiceArea);
+    }
+
+    // Пошук через LINQ
+    public ObservableCollection<Conscript> FindConscriptsByFitnessCategory(string category) =>
+        new(Conscripts.Where(c => c.FitnessCategory == category));
+
+    public ObservableCollection<Conscript> FindConscriptsByStatus(string status) =>
+        new(Conscripts.Where(c => c.Status == status));
+
+    public ObservableCollection<Conscript> FindConscriptsByAddress(string addressPart) =>
+        new(Conscripts.Where(c => !string.IsNullOrEmpty(c.Address) && c.Address.Contains(addressPart)));
+
+    public ObservableCollection<Officer> FindOfficersByRank(string rank) =>
+        new(Officers.Where(o => o.Rank == rank));
+
+    public ObservableCollection<Officer> FindOfficersByYearsOfService(int minYears, int maxYears) =>
+        new(Officers.Where(o => o.YearsOfService >= minYears && o.YearsOfService <= maxYears));
+}

@@ -1,20 +1,46 @@
 <Window x:Class="MilDB_WPF.Menu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:local="clr-namespace:MilDB_WPF"
-                mc:Ignorable="d"
-                Title="Menu" Height="200" Width="300"
-                WindowStyle="None"
-                AllowsTransparency="True"
-                Background="Transparent"
-                WindowStartupLocation="CenterScreen">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Меню ТЦК"
+        Height="250"
+        Width="350"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
     <Grid Background="DimGray">
-        <Button x:Name="AdminButton" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Адмін" Margin="0, 0, 0, 70" Style="{StaticResource GlobalButtonStyle}" Width="200" Click="AdminButton_Click"/>
-        <Button x:Name="UserButton" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Користувач" Margin="0, 70, 0, 0" Style="{StaticResource GlobalButtonStyle}" Width="200" Click="UserButton_Click"/>
-        
-        <PasswordBox PasswordChar="*" x:Name="AdminPassword"  IsEnabled="False" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 70" Style="{StaticResource GlobalPasswordBoxStyle}" Width="200"/>
-        <Button x:Name="ConfirmButton" IsEnabled="False" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Вхід" Margin="0, 70, 0, 0" Style="{StaticResource GlobalButtonStyle}" Width="200" Click="AcceptButton_Click"/>
+        <Label Content="Оберіть ТЦК:" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top" 
+               Margin="0,20,0,0" 
+               FontSize="16" 
+               Foreground="White"/>
+        <ComboBox x:Name="OfficeComboBox"
+                  Width="220"
+                  Height="35"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top"
+                  Margin="0,60,0,0"
+                  FontSize="15"
+                  Style="{StaticResource GlobalComboBoxStyle}"
+                  DisplayMemberPath="Name"/>
+        <Button x:Name="SelectOfficeButton"
+                Content="УВІЙТИ"
+                Width="220"
+                Height="56"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,110,0,0"
+                Style="{StaticResource GlobalButtonStyle}"
+                Click="SelectOfficeButton_Click"/>
+        <Button x:Name="CreateOfficeButton"
+                Content="СТВОРИТИ НОВИЙ ТЦК"
+                Width="220"
+                Height="58"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,182,0,0"
+                Style="{StaticResource GlobalButtonStyle}"
+                Click="CreateOfficeButton_Click"/>
     </Grid>
 </Window>

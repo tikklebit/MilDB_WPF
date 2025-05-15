@@ -8,54 +8,40 @@ namespace MilDB_WPF;
 
 public partial class NewOfficerWindow : Window
 {
-    private ConscriptList _conscriptList = new ConscriptList();
-    public NewOfficerWindow()
+    public Officer? CreatedOfficer { get; private set; }
+    private readonly MilitaryOffice currentOffice;
+
+    public NewOfficerWindow(MilitaryOffice office)
     {
         InitializeComponent();
+        currentOffice = office;
         LoadComboBoxData();
         StateChanged += NOW_StateChanged;
     }
-    
+
+    public NewOfficerWindow(Officer officer, MilitaryOffice office)
+    {
+        InitializeComponent();
+        currentOffice = office;
+        LoadComboBoxData();
+        FullNameTextBox.Text = officer.FullName;
+        RankComboBox.Text = officer.Rank;
+        YearsOfServiceTextBox.Text = officer.YearsOfService.ToString();
+        StateChanged += NOW_StateChanged;
+    }
+
     private void LoadComboBoxData()
     {
-        // 1. Список звань
-        // Ти можеш отримати цей список звідкись (наприклад, з класу Officer, якщо він їх зберігає)
-        // Або створити фіксований список, як тут:
         List<string> ranks = new List<string>
         {
-            "Солдат",
-            "Старший солдат",
-            "Молодший сержант",
-            "Сержант",
-            "Старший сержант",
-            "Старшина",
-            "Прапорщик", // або Головний старшина, Молодший лейтенант і т.д.
-            "Молодший лейтенант",
-            "Лейтенант",
-            "Старший лейтенант",
-            "Капітан",
-            "Майор",
-            "Підполковник",
-            "Полковник",
-            "Генерал-майор",
-            "Генерал-лейтенант",
-            "Генерал-полковник",
-            "Генерал армії України"
+            "Солдат", "Старший солдат", "Молодший сержант", "Сержант", "Старший сержант",
+            "Старшина", "Прапорщик", "Молодший лейтенант", "Лейтенант", "Старший лейтенант",
+            "Капітан", "Майор", "Підполковник", "Полковник", "Генерал-майор",
+            "Генерал-лейтенант", "Генерал-полковник", "Генерал армії України"
         };
-
-        // Призначаємо список звань до RankComboBox
         RankComboBox.ItemsSource = ranks;
-
-        // 2. Список призовників
-        // Список призовників беремо з нашого ConscriptList
-        List<Conscript> conscripts = _conscriptList.Conscripts;
-
-        // Призначаємо список призовників до ConscriptComboBox
-        ConscriptComboBox.ItemsSource = conscripts;
-        // Вказуємо, яку властивість об'єкта Conscript відображати у ComboBox
-        ConscriptComboBox.DisplayMemberPath = "FullName";
     }
-    
+
     private void DragWindow(object sender, MouseButtonEventArgs e)
     {
         if (e.ButtonState == MouseButtonState.Pressed)
@@ -69,7 +55,7 @@ public partial class NewOfficerWindow : Window
         await Task.Delay(100);
 
         this.Hide();
-        MainWindow mainWindow = new MainWindow();
+        MainWindow mainWindow = new MainWindow(currentOffice);
         mainWindow.Show();
     }
 
@@ -80,7 +66,7 @@ public partial class NewOfficerWindow : Window
         await Task.Delay(100);
         WindowState = WindowState.Minimized;
     }
-    
+
     private void NOW_StateChanged(object sender, EventArgs e)
     {
         if (WindowState == WindowState.Normal)
@@ -89,7 +75,7 @@ public partial class NewOfficerWindow : Window
             this.BeginAnimation(OpacityProperty, fadeIn);
         }
     }
-    
+
     private async void ExitButton_Click(object sender, EventArgs e)
     {
         var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
@@ -97,30 +83,34 @@ public partial class NewOfficerWindow : Window
         await Task.Delay(100);
         this.Hide();
 
-        MainWindow mainWindow = new MainWindow();
+        MainWindow mainWindow = new MainWindow(currentOffice);
         mainWindow.Show();
     }
 
-    public void AddButton_Click(object sender, EventArgs e)
+    private void AddButton_Click(object sender, RoutedEventArgs e)
     {
-        string name = FullNameTextBox.Text;
+        string name = FullNameTextBox.Text.Trim();
         string rank = RankComboBox.Text;
-        int yearsOfService = int.Parse(YearsOfServiceTextBox.Text);
+        int yearsOfService;
+        if (!int.TryParse(YearsOfServiceTextBox.Text, out yearsOfService))
+        {
+            ErrorLabel.Content = "Некоректний стаж!";
+            ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
+            ErrorLabel.Visibility = Visibility.Visible;
+            return;
+        }
 
-        Officer officer = new Officer(name, rank, yearsOfService);
+        var officer = new Officer(name, rank, yearsOfService);
         if (officer.Valid())
         {
-            OfficerList officerList = new OfficerList();
-            officerList.AddOfficer(officer);
-            string greatMessage = "Успішно додано!";
-            ErrorLabel.Content = greatMessage;
-            ErrorLabel.Foreground = new SolidColorBrush(Colors.Green);
-            ErrorLabel.Visibility = Visibility.Visible;
+            CreatedOfficer = officer;
+            DialogResult = true;
+            Close();
         }
         else
         {
-            string errorMessage = officer.GetCheck();
-            ErrorLabel.Content = errorMessage;
+            ErrorLabel.Content = "Введені дані некоректні!";
+            ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
             ErrorLabel.Visibility = Visibility.Visible;
         }
     }

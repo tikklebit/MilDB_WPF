@@ -9,6 +9,7 @@ namespace MilDB_WPF
     /// </summary>
     public partial class Select : Window
     {
+        private readonly MilitaryOffice currentOffice;
         public Select()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace MilDB_WPF
             await Task.Delay(300);
 
             this.Hide();
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(currentOffice);
             mainWindow.Show();
         }
 
@@ -57,7 +58,7 @@ namespace MilDB_WPF
 
         public void NewOfficerButton_Click(object sender, RoutedEventArgs e)
         {
-            NewOfficerWindow newOfficerWindow = new NewOfficerWindow();
+            NewOfficerWindow newOfficerWindow = new NewOfficerWindow(currentOffice);
             newOfficerWindow.Show();
             this.Hide();
         }

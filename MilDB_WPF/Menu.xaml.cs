@@ -1,47 +1,55 @@
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace MilDB_WPF;
 
 public partial class Menu : Window
 {
+    private ObservableCollection<MilitaryOffice> _offices;
+    private readonly string _officesFile = "offices.json";
+
     public Menu()
     {
         InitializeComponent();
+        LoadOffices();
     }
 
-    private void AdminButton_Click(object sender, EventArgs e)
+    private void LoadOffices()
     {
-        AdminButton.Visibility = Visibility.Collapsed;
-        AdminButton.IsEnabled = false;
-        UserButton.Visibility = Visibility.Collapsed;
-        UserButton.IsEnabled = false;
-        
-        AdminPassword.Visibility = Visibility.Visible;
-        AdminPassword.IsEnabled = true;
-        ConfirmButton.Visibility = Visibility.Visible;
-        ConfirmButton.IsEnabled = true;
+        _offices = MilitaryOfficeService.LoadAll(_officesFile);
+        OfficeComboBox.ItemsSource = _offices;
+        OfficeComboBox.DisplayMemberPath = "Name";
     }
 
-    private void AcceptButton_Click(object sender, EventArgs e)
+    private void SaveOffices()
     {
-        if (AdminPassword.Password == "admin")
+        MilitaryOfficeService.SaveAll(_officesFile, _offices);
+    }
+
+    private void SelectOfficeButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (OfficeComboBox.SelectedItem is MilitaryOffice selectedOffice)
         {
-            this.Hide(); 
-            MainWindow main = new MainWindow();
+            MainWindow main = new MainWindow(selectedOffice);
             main.Show();
+            this.Hide();
         }
         else
         {
-            MessageBox.Show("Неправильний пароль!");
-            AdminPassword.Password = String.Empty;
+            MessageBox.Show("Оберіть ТЦК зі списку!", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
-    
-    private void UserButton_Click(object sender, EventArgs e)
+
+    private void CreateOfficeButton_Click(object sender, RoutedEventArgs e)
     {
-        this.Hide(); 
-        MainWindow main = new MainWindow();
-        main.Show();
+        var newOfficeWindow = new NewMilitaryOfficeWindow();
+        newOfficeWindow.OfficeCreated += (s, office) =>
+        {
+            _offices.Add(office);
+            SaveOffices();
+            LoadOffices();
+            OfficeComboBox.SelectedItem = office;
+        };
+        newOfficeWindow.ShowDialog();
     }
 }

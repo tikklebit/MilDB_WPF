@@ -1,108 +1,120 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace MilDB_WPF
+namespace MilDB_WPF;
+
+public partial class NewConscriptWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for NewConscriptWindow.xaml
-    /// </summary>
-    public partial class NewConscriptWindow : Window
+    public Conscript? CreatedConscript { get; private set; }
+    private readonly MilitaryOffice currentOffice;
+
+    // Додавання конструктора з office для коректної навігації
+    public NewConscriptWindow(MilitaryOffice office)
     {
-        public NewConscriptWindow()
+        InitializeComponent();
+        currentOffice = office;
+        StateChanged += NCW_StateChanged;
+    }
+
+    // Для редагування
+    public NewConscriptWindow(Conscript conscript, MilitaryOffice office)
+    {
+        InitializeComponent();
+        currentOffice = office;
+        // Заповнення полів
+        FullNameTextBox.Text = conscript.FullName;
+        BirthDatePicker.SelectedDate = conscript.BirthDate;
+        AddressTextBox.Text = conscript.Address;
+        HealthStatusTextBox.Text = conscript.HealthStatus;
+        FitnessCategoryComboBox.Text = conscript.FitnessCategory;
+        StatusComboBox.Text = conscript.Status;
+        StateChanged += NCW_StateChanged;
+    }
+
+    // Для сумісності зі старим кодом (не рекомендується використовувати)
+    public NewConscriptWindow()
+    {
+        InitializeComponent();
+        StateChanged += NCW_StateChanged;
+    }
+
+    private void DragWindow(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == MouseButtonState.Pressed)
+            DragMove();
+    }
+
+    private async void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
+        this.BeginAnimation(OpacityProperty, fadeOut);
+        await System.Threading.Tasks.Task.Delay(100);
+
+        this.Hide();
+        MainWindow mainWindow = new MainWindow(currentOffice);
+        mainWindow.Show();
+    }
+
+    private async void HideButton_Click(object sender, RoutedEventArgs e)
+    {
+        var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
+        this.BeginAnimation(OpacityProperty, fadeOut);
+        await System.Threading.Tasks.Task.Delay(100);
+        WindowState = WindowState.Minimized;
+    }
+
+    private void NCW_StateChanged(object sender, EventArgs e)
+    {
+        if (WindowState == WindowState.Normal)
         {
-            InitializeComponent();
-            StateChanged += NCW_StateChanged;
+            var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1));
+            this.BeginAnimation(OpacityProperty, fadeIn);
+        }
+    }
+
+    private async void ExitButton_Click(object sender, RoutedEventArgs e)
+    {
+        var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
+        this.BeginAnimation(OpacityProperty, fadeOut);
+        await System.Threading.Tasks.Task.Delay(100);
+        this.Hide();
+
+        MainWindow mainWindow = new MainWindow(currentOffice);
+        mainWindow.Show();
+    }
+
+    private void AddButton_Click(object sender, RoutedEventArgs e)
+    {
+        string name = FullNameTextBox.Text.Trim();
+        DateTime? birthDate = BirthDatePicker.SelectedDate;
+        string address = AddressTextBox.Text.Trim();
+        string healthStatus = HealthStatusTextBox.Text.Trim();
+        string fitnessCategory = FitnessCategoryComboBox.Text;
+        string status = StatusComboBox.Text;
+
+        if (birthDate == null)
+        {
+            ErrorLabel.Content = "Вкажіть дату народження!";
+            ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
+            ErrorLabel.Visibility = Visibility.Visible;
+            return;
         }
 
-        private void DragWindow(object sender, MouseButtonEventArgs e)
+        var conscript = new Conscript(name, birthDate.Value, address, healthStatus, fitnessCategory, status);
+        if (conscript.Valid())
         {
-            if (e.ButtonState == MouseButtonState.Pressed)
-                DragMove();
+            CreatedConscript = conscript;
+            DialogResult = true;
+            Close();
         }
-
-        private async void CloseButton_Click(object sender, RoutedEventArgs e)
+        else
         {
-            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
-            this.BeginAnimation(OpacityProperty, fadeOut);
-            await Task.Delay(100);
-
-            this.Hide();
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-        }
-
-        private async void HideButton_Click(object sender, RoutedEventArgs e)
-        {
-            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
-            this.BeginAnimation(OpacityProperty, fadeOut);
-            await Task.Delay(100);
-            WindowState = WindowState.Minimized;
-        }
-        private void NCW_StateChanged(object sender, EventArgs e)
-        {
-            if (WindowState == WindowState.Normal)
-            {
-                var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.1));
-                this.BeginAnimation(OpacityProperty, fadeIn);
-            }
-        }
-
-        private async void ExitButton_Click(object sender, EventArgs e)
-        {
-            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
-            this.BeginAnimation(OpacityProperty, fadeOut);
-            await Task.Delay(100);
-            this.Hide();
-
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-        }
-
-        public void AddButton_Click(object sender, EventArgs e)
-        {
-            string name = FullNameTextBox.Text;
-            DatePicker birthDate = BirthDatePicker;
-            string address = AddressTextBox.Text;
-            string healthStatus = HealthStatusTextBox.Text;
-            string fitnessCategory = FitnessCategoryComboBox.Text;
-            string status = StatusComboBox.Text;
-
-
-            if (birthDate.SelectedDate.HasValue)
-            {
-                Conscript? conscript = new Conscript(name, birthDate.SelectedDate.Value, address, healthStatus, fitnessCategory, status);
-                if (conscript.Valid())
-                {
-                    ConscriptList conscriptList = new ConscriptList();
-                    conscriptList.AddConscript(conscript);
-                    string greatMessage = "Успішно додано!";
-                    ErrorLabel.Content = greatMessage;
-                    ErrorLabel.Foreground = new SolidColorBrush(Colors.Green);
-                    ErrorLabel.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    string errorMessage = conscript.GetCheck();
-                    ErrorLabel.Content = errorMessage;
-                    ErrorLabel.Visibility = Visibility.Visible;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Оберіть дату народження!", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            ErrorLabel.Content = "Введені дані некоректні!";
+            ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
+            ErrorLabel.Visibility = Visibility.Visible;
         }
     }
 }

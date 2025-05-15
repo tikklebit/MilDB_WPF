@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\newofficerwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\newofficerwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\newofficerwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\newofficerwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\newconscriptwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\newconscriptwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -15,8 +23,32 @@
       "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\officer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\officer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\newmilitaryofficewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\newmilitaryofficewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\select.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\select.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\newconscriptwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\newconscriptwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\newmilitaryofficewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\newmilitaryofficewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\menu.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\menu.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|c:\\users\\tikkle\\riderprojects\\mildb_wpf\\mildb_wpf\\menu.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B0F9D9-C8FB-48AF-9054-73E31928AB1B}|MilDB_WPF\\MilDB_WPF.csproj|solutionrelative:mildb_wpf\\menu.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 232,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,62 +86,66 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
+              "Title": "Select.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\Select.xaml.cs",
+              "RelativeDocumentMoniker": "MilDB_WPF\\Select.xaml.cs",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\Select.xaml.cs",
+              "RelativeToolTip": "MilDB_WPF\\Select.xaml.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAswD4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T19:39:04.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NewOfficerWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewOfficerWindow.xaml",
+              "RelativeDocumentMoniker": "MilDB_WPF\\NewOfficerWindow.xaml",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewOfficerWindow.xaml",
+              "RelativeToolTip": "MilDB_WPF\\NewOfficerWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-15T19:36:31.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "NewConscriptWindow.xaml",
               "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewConscriptWindow.xaml",
               "RelativeDocumentMoniker": "MilDB_WPF\\NewConscriptWindow.xaml",
               "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewConscriptWindow.xaml",
               "RelativeToolTip": "MilDB_WPF\\NewConscriptWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-15T15:05:28.288Z",
+              "WhenOpened": "2025-05-15T19:27:35.326Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Officer.cs",
-              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\Officer.cs",
-              "RelativeDocumentMoniker": "MilDB_WPF\\Officer.cs",
-              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\Officer.cs",
-              "RelativeToolTip": "MilDB_WPF\\Officer.cs",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAmwKEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T15:00:12.329Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MilDB_WPF\\MainWindow.xaml",
               "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\MainWindow.xaml",
               "RelativeToolTip": "MilDB_WPF\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-15T11:04:21.532Z",
+              "WhenOpened": "2025-05-15T18:55:49.656Z",
               "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "a7e93661-3e63-4058-b2e6-f78d04a7cfaf",
-        "Display": 0,
-        "X": 43,
-        "Y": 55,
-        "Width": 1882,
-        "Height": 982,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NewOfficerWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewOfficerWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MilDB_WPF\\NewOfficerWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewOfficerWindow.xaml.cs",
+              "RelativeToolTip": "MilDB_WPF\\NewOfficerWindow.xaml.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAwwC8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T19:03:36.65Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -118,9 +154,84 @@
               "RelativeDocumentMoniker": "MilDB_WPF\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\MainWindow.xaml.cs*",
               "RelativeToolTip": "MilDB_WPF\\MainWindow.xaml.cs*",
-              "ViewState": "AgIAAPwBAAAAAAAAAAAkwFYCAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAmwMAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:26:52.804Z",
+              "WhenOpened": "2025-05-15T18:55:07.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NewMilitaryOfficeWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewMilitaryOfficeWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MilDB_WPF\\NewMilitaryOfficeWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewMilitaryOfficeWindow.xaml.cs",
+              "RelativeToolTip": "MilDB_WPF\\NewMilitaryOfficeWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T19:36:37.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "NewMilitaryOfficeWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewMilitaryOfficeWindow.xaml",
+              "RelativeDocumentMoniker": "MilDB_WPF\\NewMilitaryOfficeWindow.xaml",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewMilitaryOfficeWindow.xaml",
+              "RelativeToolTip": "MilDB_WPF\\NewMilitaryOfficeWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-15T19:36:33.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NewConscriptWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewConscriptWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MilDB_WPF\\NewConscriptWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\NewConscriptWindow.xaml.cs",
+              "RelativeToolTip": "MilDB_WPF\\NewConscriptWindow.xaml.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAowDgAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T19:03:23.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\App.xaml",
+              "RelativeDocumentMoniker": "MilDB_WPF\\App.xaml",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\App.xaml",
+              "RelativeToolTip": "MilDB_WPF\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-15T19:37:44.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Menu.xaml",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\Menu.xaml",
+              "RelativeDocumentMoniker": "MilDB_WPF\\Menu.xaml",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\Menu.xaml",
+              "RelativeToolTip": "MilDB_WPF\\Menu.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-15T18:49:33.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Menu.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\Menu.xaml.cs",
+              "RelativeDocumentMoniker": "MilDB_WPF\\Menu.xaml.cs",
+              "ToolTip": "C:\\Users\\tikkle\\RiderProjects\\MilDB_WPF\\MilDB_WPF\\Menu.xaml.cs",
+              "RelativeToolTip": "MilDB_WPF\\Menu.xaml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAwwDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T18:46:26.516Z",
               "EditorCaption": ""
             }
           ]

@@ -2,55 +2,39 @@
     x:Class="MilDB_WPF.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    x:Name="MilDBMainWindow"
-    Title="MainWindow"
-    Width="1293"
-    Height="689"
+    Title="ТАБЛИЦЯ"
+    Width="1200"
+    Height="700"
+    WindowStyle="None"
     AllowsTransparency="True"
     Background="Transparent"
-    WindowStyle="None"
     WindowStartupLocation="CenterScreen">
-
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="Window.Loaded">
-            <BeginStoryboard>
-                <Storyboard>
-                    <DoubleAnimation
-                        Storyboard.TargetProperty="Opacity"
-                        From="0"
-                        To="1"
-                        Duration="0:0:0.5" />
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-    </Window.Triggers>
 
     <Grid>
         <Border
             x:Name="BGBorder"
-            Background="#FF2E2E2E"
             CornerRadius="20"
+            Background="#FF2E2E2E"
             Opacity="0.95">
             <Grid>
+                <!-- Top bar -->
                 <Border
                     x:Name="TopMenuBorder"
-                    Height="25"
+                    CornerRadius="20,20,0,0"
+                    Height="40"
                     VerticalAlignment="Top"
                     Background="Black"
-                    CornerRadius="20, 20, 0, 0"
+                    Opacity="0.98"
                     MouseLeftButtonDown="DragWindow">
                     <Grid>
                         <Label
                             x:Name="Title"
+                            Content="ТАБЛИЦЯ"
+                            Foreground="White"
+                            FontSize="18"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="White" />
-                        <Border
-                            x:Name="CloseProgramButtonBorder"
-                            Width="40"
-                            Height="25"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Center"/>
+                        <Border Width="40" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top">
                             <Button
                                 Width="40"
                                 Height="25"
@@ -60,13 +44,7 @@
                                 Click="CloseButton_Click"
                                 Style="{StaticResource TopBarButtonStyle}" />
                         </Border>
-
-                        <Border
-                            x:Name="HideButtonBorder"
-                            Width="40"
-                            Height="25"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
+                        <Border Width="40" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Button
                                 Width="40"
                                 Height="25"
@@ -78,126 +56,62 @@
                         </Border>
                     </Grid>
                 </Border>
+
+                <!-- Main content -->
+                <StackPanel Orientation="Vertical" Margin="20,60,20,20">
+                    <!-- Action buttons -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                        <Button Content="ПРИЗОВНИКИ" x:Name="ConscriptTableButton"
+                                Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
+                                Margin="0,0,10,0" Click="ConscriptTableButton_Click"/>
+                        <Button Content="ОФІЦЕРИ" x:Name="OfficerTableButton"
+                                Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
+                                Margin="0,0,30,0" Click="OfficerTableButton_Click"/>
+                        <Button Content="ДОДАТИ" x:Name="AddButton"
+                                Style="{StaticResource GlobalButtonStyle}" Width="120" Height="60"
+                                Margin="0,0,10,0" Click="AddButton_Click"/>
+                        <Button Content="РЕДАГУВАТИ" x:Name="EditButton"
+                                Style="{StaticResource GlobalButtonStyle}" Width="120" Height="60"
+                                Margin="0,0,10,0" Click="EditButton_Click"/>
+                        <Button Content="ВИДАЛИТИ" x:Name="DeleteButton"
+                                Style="{StaticResource GlobalButtonStyle}" Width="120" Height="60"
+                                Margin="0,0,30,0" Click="DeleteButton_Click"/>
+                        <Button Content="ЗБЕРЕГТИ ТЦК" x:Name="SaveOfficeButton"
+                                Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
+                                Click="SaveOfficeButton_Click"/>
+                    </StackPanel>
+
+                    <!-- Search -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Content="Пошук:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+                        <TextBox x:Name="SearchTextBox" Width="300" Height="35" FontSize="15"
+                                 Style="{StaticResource GlobalTextBoxStyle}" Margin="10,0,0,0"
+                                 TextChanged="SearchTextBox_TextChanged"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Content="Сортувати за:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="SortComboBox" Width="200" Height="35" FontSize="15" Margin="10,0,0,0"
+              Style="{StaticResource GlobalComboBoxStyle}">
+                            <ComboBoxItem Content="ПІБ" Tag="Name"/>
+                            <ComboBoxItem Content="Адреса" Tag="Address"/>
+                            <ComboBoxItem Content="Дата народження" Tag="BirthDate"/>
+                            <ComboBoxItem Content="Стаж (офіцери)" Tag="YearsOfService"/>
+                            <ComboBoxItem Content="Звання (офіцери)" Tag="Rank"/>
+                        </ComboBox>
+                        <Button Content="Сортувати" Width="120" Height="35" Margin="10,0,0,0"
+            Style="{StaticResource GlobalButtonStyle}" Click="SortButton_Click"/>
+                    </StackPanel>
+
+                    <!-- DataGrid -->
+                    <DataGrid x:Name="DataGrid"
+                              Style="{StaticResource GlobalDataGridStyle}"
+                              AutoGenerateColumns="True"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              Height="500"/>
+                </StackPanel>
             </Grid>
         </Border>
-
-        <Grid Margin="20,60,1120,20">
-            <Border
-                x:Name="ControlCenterBorder"
-                Background="Azure"
-                CornerRadius="20, 0, 0, 20" Margin="0,0,-300,0">
-                <Grid>
-                    <Button
-                        x:Name="CreateObjectButton"
-                        Margin="40"
-                        VerticalAlignment="Top"
-                        Click="OpenSelectWindow_Click"
-                        Content="СТВОРИТИ"
-                        Style="{StaticResource GlobalButtonStyle}" />
-                    <Button
-                        x:Name="Уви"
-                        Margin="40,120,40,0"
-                        VerticalAlignment="Top"
-                        Click="ChangeInfoButton_Click"
-                        Content="РЕДАГУВАТИ ІНФОРМАЦІЮ"
-                        Style="{StaticResource GlobalButtonStyle}" />
-                    <Button
-                        x:Name="Увинск"
-                        Margin="40,200,40,0"
-                        VerticalAlignment="Top"
-                        Click="DeleteButton_Click"
-                        Content="ВИДАЛИТИ З БАЗИ"
-                        Style="{StaticResource GlobalButtonStyle}" />
-                    <Button
-                        x:Name="SortButton"
-                        Margin="40,280,40,0"
-                        VerticalAlignment="Top"
-                        Click="SortMenu"
-                        Content="СОРТУВАТИ"
-                        Style="{StaticResource GlobalButtonStyle}" />
-                    <Label
-                        x:Name="SortTitle"
-                        Margin="40, 0, 40, 90"
-                        VerticalAlignment="Center"
-                        Content="Сортувати за..."
-                        FontSize="25"
-                        Visibility="Collapsed" />
-                    <ComboBox
-                        x:Name="SortComboBox"
-                        Margin="40,0,40,0"
-                        VerticalAlignment="Center"
-                        Visibility="Collapsed" />
-                    <Button
-                        Margin="40, 0, 40, 40"
-                        VerticalAlignment="Bottom"
-                        Click="SaveToFileButton_Click"
-                        Content="ЗБЕРЕГТИ ЯК..."
-                        Style="{StaticResource GlobalButtonStyle}" />
-                    <Button
-                        Margin="40,0,40,120"
-                        VerticalAlignment="Bottom"
-                        Click="SaveToOpenFile"
-                        Content="ЗБЕРЕГТИ"
-                        Style="{StaticResource GlobalButtonStyle}" />
-                    <Button
-                        Margin="40,0,40,200"
-                        VerticalAlignment="Bottom"
-                        Click="OpenFromFileButton_Click"
-                        Content="ВІДКРИТИ"
-                        Style="{StaticResource GlobalButtonStyle}" />
-                </Grid>
-            </Border>
-        </Grid>
-
-        <Grid Margin="490,60,20,20">
-            <Border
-                x:Name="TableInfo"
-                Background="Azure"
-                CornerRadius="0, 20, 20, 0">
-                <Grid>
-                    <Grid Margin="10,10,10,140">
-                        <DataGrid
-                            x:Name="DataGrid"
-                            Style="{StaticResource GlobalDataGridStyle}"
-                            AutoGenerateColumns="False"
-                            IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Width="30" Binding="{Binding ID}" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding FullName}"
-                                    Header="Призовник" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding FormattedBirthDate}"
-                                    Header="Дата народження" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding Address}"
-                                    Header="Адреса проживання" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding HealthStatus}"
-                                    Header="Стан здоров'я" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding FitnessCategory}"
-                                    Header="Категорія придатності" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding Status}"
-                                    Header="Статус" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
-
-                    <Button x:Name="ConscriptTableButton" Content="ПРИЗОВНИКИ" Margin="10, 470, 400, 90" Style="{StaticResource GlobalButtonStyle}" Click="ConscriptTableButton_Click"/>
-                    <Button x:Name="OfficerTableButton" Content="ОФІЦЕРИ" Margin="400, 470, 10, 90" Style="{StaticResource GlobalButtonStyle}" Click="OfficerTableButton_Click"/>
-
-                    <Label Content="Пошук за іменем та прізвищем" FontSize="15" Margin="10, 515, 10, 60"></Label>
-                    <TextBox Margin="10, 555, 10, 10" x:Name="SearchTextBox" FontSize="15" Style="{StaticResource GlobalTextBoxStyle}" TextChanged="SearchTextBox_TextChanged"></TextBox>
-                </Grid>
-            </Border>
-        </Grid>
     </Grid>
 </Window>
