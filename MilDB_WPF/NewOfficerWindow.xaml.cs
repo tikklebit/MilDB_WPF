@@ -8,10 +8,52 @@ namespace MilDB_WPF;
 
 public partial class NewOfficerWindow : Window
 {
+    private ConscriptList _conscriptList = new ConscriptList();
     public NewOfficerWindow()
     {
         InitializeComponent();
+        LoadComboBoxData();
         StateChanged += NOW_StateChanged;
+    }
+    
+    private void LoadComboBoxData()
+    {
+        // 1. Список звань
+        // Ти можеш отримати цей список звідкись (наприклад, з класу Officer, якщо він їх зберігає)
+        // Або створити фіксований список, як тут:
+        List<string> ranks = new List<string>
+        {
+            "Солдат",
+            "Старший солдат",
+            "Молодший сержант",
+            "Сержант",
+            "Старший сержант",
+            "Старшина",
+            "Прапорщик", // або Головний старшина, Молодший лейтенант і т.д.
+            "Молодший лейтенант",
+            "Лейтенант",
+            "Старший лейтенант",
+            "Капітан",
+            "Майор",
+            "Підполковник",
+            "Полковник",
+            "Генерал-майор",
+            "Генерал-лейтенант",
+            "Генерал-полковник",
+            "Генерал армії України"
+        };
+
+        // Призначаємо список звань до RankComboBox
+        RankComboBox.ItemsSource = ranks;
+
+        // 2. Список призовників
+        // Список призовників беремо з нашого ConscriptList
+        List<Conscript> conscripts = _conscriptList.Conscripts;
+
+        // Призначаємо список призовників до ConscriptComboBox
+        ConscriptComboBox.ItemsSource = conscripts;
+        // Вказуємо, яку властивість об'єкта Conscript відображати у ComboBox
+        ConscriptComboBox.DisplayMemberPath = "FullName";
     }
     
     private void DragWindow(object sender, MouseButtonEventArgs e)

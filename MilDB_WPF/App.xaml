@@ -277,5 +277,65 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style x:Key="GlobalComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="White"/> <Setter Property="Background" Value="#2A2A2A"/> <Setter Property="BorderBrush" Value="#505050"/> <Setter Property="BorderThickness" Value="1"/> <Setter Property="Padding" Value="3,3,3,3"/> <Setter Property="Height" Value="30"/> <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/> <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="10" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/> <ColumnDefinition Width="Auto"/> </Grid.ColumnDefinitions>
+                                    <ContentPresenter Grid.Column="0"
+                                                      Content="{TemplateBinding SelectionBoxItem}"
+                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                      ContentStringFormat="{TemplateBinding ItemStringFormat}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    <ToggleButton
+                                         Grid.Column="1"
+                                         Background="Transparent"
+                                         BorderBrush="Transparent"
+                                         BorderThickness="0"
+                                         Width="{TemplateBinding ActualHeight}"
+                                         IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                         Focusable="False"
+                                         Cursor="Hand">
+                                        <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                     </ToggleButton>
+                                </Grid>
+                            </Border>
+                             <Popup
+                                 x:Name="PART_Popup"
+                                 Placement="Bottom"
+                                 IsOpen="{TemplateBinding IsDropDownOpen}"
+                                 AllowsTransparency="True"
+                                 PopupAnimation="Fade">
+                                  <Border
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      Background="{TemplateBinding Background}">
+                                      <ScrollViewer SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                           <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                       </ScrollViewer>
+                                  </Border>
+                             </Popup>
+                        </Grid>
+                     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                    <Setter Property="BorderBrush" Value="#1E90FF"/> </Trigger>
+                </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

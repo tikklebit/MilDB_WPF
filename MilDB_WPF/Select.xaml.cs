@@ -54,5 +54,12 @@ namespace MilDB_WPF
             newConscriptWindow.Show();
             this.Hide();
         }
+
+        public void NewOfficerButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewOfficerWindow newOfficerWindow = new NewOfficerWindow();
+            newOfficerWindow.Show();
+            this.Hide();
+        }
     }
 }

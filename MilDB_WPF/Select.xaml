@@ -36,7 +36,7 @@
         </Border>
         <Grid Margin="0, 25, 0, 0">
             <Button x:Name="NewConscriptButton" VerticalAlignment="Top" Margin="20" Content="НОВИЙ ПРИЗОВНИК" Style="{StaticResource GlobalButtonStyle}" Click="NewConscriptButton_Click"/>
-            <Button x:Name="NewOfficerButton" VerticalAlignment="Center" Margin="20" Content="НОВИЙ ОФІЦЕР" Style="{StaticResource GlobalButtonStyle}"/>
+            <Button x:Name="NewOfficerButton" VerticalAlignment="Center" Margin="20" Content="НОВИЙ ОФІЦЕР" Style="{StaticResource GlobalButtonStyle}" Click="NewOfficerButton_Click"/>
             <Button x:Name="NewMilitaryButton" VerticalAlignment="Bottom" Margin="20" Content="НОВЕ ТЦК" Style="{StaticResource GlobalButtonStyle}"/>
         </Grid>
     </Grid>

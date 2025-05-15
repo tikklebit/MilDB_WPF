@@ -82,43 +82,20 @@
                 <Grid Margin="20,40,20,20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Margin="10">
                         <Label Content="Ім'я та прізвище:"  Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox x:Name="FullNameTextBox" Style="{StaticResource GlobalTextBoxStyle}"/> <Label Content="Дата народження:" Foreground="White" Margin="0,10,0,5"/>
-                        <DatePicker
-                            x:Name="BirthDatePicker" Style="{StaticResource GlobalDatePickerStyle}"
-                            Height="30" Foreground="White" Background="#2A2A2A" BorderBrush="#505050" BorderThickness="1"/> <Label Content="Адреса проживання:" Foreground="White" Margin="0,10,0,5"/>
-                        <TextBox x:Name="AddressTextBox" Style="{StaticResource GlobalTextBoxStyle}"/> </StackPanel>
-
-                    <StackPanel Grid.Column="1" Margin="10">
-                        <Label Content="Стан здоров'я:" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox
-                            x:Name="HealthStatusTextBox"
-                            Height="60"
-                            Style="{StaticResource GlobalTextBoxStyle}" TextWrapping="Wrap"
-                            AcceptsReturn="True"/>
-
-                        <Label Content="Категорія придатності:" Foreground="White" Margin="0,10,0,5"/>
-                        <ComboBox
-                            x:Name="FitnessCategoryComboBox"
-                            Height="30" Foreground="White" Background="#2A2A2A" BorderBrush="#505050" BorderThickness="1"> <ComboBoxItem Content="А"/>
-                            <ComboBoxItem Content="Б"/>
-                            <ComboBoxItem Content="В"/>
-                            <ComboBoxItem Content="Г"/>
-                            <ComboBoxItem Content="Д"/>
-                        </ComboBox>
-
-                        <Label Content="Статус:" Foreground="White" Margin="0,10,0,5"/>
-                         <ComboBox
-                            x:Name="StatusComboBox"
-                            Height="30" Foreground="White" Background="#2A2A2A" BorderBrush="#505050" BorderThickness="1"> <ComboBoxItem Content="придатний"/>
-                            <ComboBoxItem Content="відстрочка"/>
-                            <ComboBoxItem Content="непридатний"/>
-                        </ComboBox>
-
+                        <TextBox x:Name="FullNameTextBox" Style="{StaticResource GlobalTextBoxStyle}"/>
+                        
+                        <Label Content="Звання:" Foreground="White" Margin="0,10,0,5"/>
+                        <ComboBox x:Name="RankComboBox" Style="{StaticResource GlobalComboBoxStyle}"/>
+                        
+                        <Label Content="Стаж:" Foreground="White" Margin="0,10,0,5"/>
+                        <TextBox x:Name="YearsPfService" Style="{StaticResource GlobalTextBoxStyle}"/>
+                        
+                        <Label Content="Призначений призовник:" Foreground="White" Margin="0,10,0,5"/>
+                        <ComboBox x:Name="ConscriptComboBox" Style="{StaticResource GlobalComboBoxStyle}"/>
                     </StackPanel>
 
                     <Grid
