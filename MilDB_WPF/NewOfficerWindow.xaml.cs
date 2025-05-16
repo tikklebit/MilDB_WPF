@@ -40,7 +40,12 @@ public partial class NewOfficerWindow : Window
             "Генерал-лейтенант", "Генерал-полковник", "Генерал армії України"
         };
         RankComboBox.ItemsSource = ranks;
+
+        ConscriptComboBox.ItemsSource = currentOffice.Conscripts;
+        ConscriptComboBox.DisplayMemberPath = "FullName";
     }
+
+
 
     private void DragWindow(object sender, MouseButtonEventArgs e)
     {
@@ -53,10 +58,7 @@ public partial class NewOfficerWindow : Window
         var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
         this.BeginAnimation(OpacityProperty, fadeOut);
         await Task.Delay(100);
-
         this.Hide();
-        MainWindow mainWindow = new MainWindow(currentOffice);
-        mainWindow.Show();
     }
 
     private async void HideButton_Click(object sender, RoutedEventArgs e)
@@ -82,9 +84,6 @@ public partial class NewOfficerWindow : Window
         this.BeginAnimation(OpacityProperty, fadeOut);
         await Task.Delay(100);
         this.Hide();
-
-        MainWindow mainWindow = new MainWindow(currentOffice);
-        mainWindow.Show();
     }
 
     private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -101,6 +100,10 @@ public partial class NewOfficerWindow : Window
         }
 
         var officer = new Officer(name, rank, yearsOfService);
+        if (ConscriptComboBox.SelectedItem is Conscript selectedConscript)
+        {
+            officer.AssignedConscripts.Add(selectedConscript);
+        }
         if (officer.Valid())
         {
             CreatedOfficer = officer;
@@ -114,4 +117,5 @@ public partial class NewOfficerWindow : Window
             ErrorLabel.Visibility = Visibility.Visible;
         }
     }
+
 }

@@ -12,12 +12,14 @@ namespace MilDB_WPF;
 public partial class MainWindow : Window
 {
     private readonly MilitaryOffice currentOffice;
+    private readonly string officesFile;
     private bool showingConscripts = true;
 
-    public MainWindow(MilitaryOffice office)
+    public MainWindow(MilitaryOffice office, string officesFile)
     {
         InitializeComponent();
         currentOffice = office;
+        this.officesFile = officesFile;
         Title.Content = $"ТАБЛИЦЯ - {currentOffice.Name}";
         ShowConscripts();
     }
@@ -48,6 +50,7 @@ public partial class MainWindow : Window
             if (window.ShowDialog() == true && window.CreatedConscript != null && window.CreatedConscript.Valid())
             {
                 currentOffice.Conscripts.Add(window.CreatedConscript);
+                SaveAllOffices();
             }
         }
         else
@@ -56,6 +59,7 @@ public partial class MainWindow : Window
             if (window.ShowDialog() == true && window.CreatedOfficer != null && window.CreatedOfficer.Valid())
             {
                 currentOffice.Officers.Add(window.CreatedOfficer);
+                SaveAllOffices();
             }
         }
     }
@@ -76,6 +80,7 @@ public partial class MainWindow : Window
                 int idx = currentOffice.Conscripts.IndexOf(conscript);
                 if (idx >= 0)
                     currentOffice.Conscripts[idx] = window.CreatedConscript;
+                SaveAllOffices();
             }
         }
         else if (!showingConscripts && DataGrid.SelectedItem is Officer officer)
@@ -86,6 +91,7 @@ public partial class MainWindow : Window
                 int idx = currentOffice.Officers.IndexOf(officer);
                 if (idx >= 0)
                     currentOffice.Officers[idx] = window.CreatedOfficer;
+                SaveAllOffices();
             }
         }
     }
@@ -101,10 +107,12 @@ public partial class MainWindow : Window
         if (showingConscripts && DataGrid.SelectedItem is Conscript conscript)
         {
             currentOffice.Conscripts.Remove(conscript);
+            SaveAllOffices();
         }
         else if (!showingConscripts && DataGrid.SelectedItem is Officer officer)
         {
             currentOffice.Officers.Remove(officer);
+            SaveAllOffices();
         }
     }
 
@@ -171,6 +179,17 @@ public partial class MainWindow : Window
         }
     }
 
+    private void SaveAllOffices()
+    {
+        var offices = MilitaryOfficeService.LoadAll(officesFile);
+        var idx = offices.ToList().FindIndex(o => o.Name == currentOffice.Name && o.Address == currentOffice.Address);
+        if (idx >= 0)
+            offices[idx] = currentOffice;
+        else
+            offices.Add(currentOffice);
+        MilitaryOfficeService.SaveAll(offices);
+    }
+
     private void SaveOfficeButton_Click(object sender, RoutedEventArgs e)
     {
         var dialog = new SaveFileDialog
@@ -181,10 +200,33 @@ public partial class MainWindow : Window
         };
         if (dialog.ShowDialog() == true)
         {
-            MilitaryOfficeService.SaveAll(dialog.FileName, new ObservableCollection<MilitaryOffice> { currentOffice });
+            MilitaryOfficeService.SaveAll(new ObservableCollection<MilitaryOffice> { currentOffice });
             MessageBox.Show("ТЦК збережено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
+
+    private void OpenOfficeButton_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new Microsoft.Win32.OpenFileDialog
+        {
+            Filter = "JSON файли (*.json)|*.json|Усі файли (*.*)|*.*",
+            DefaultExt = "json",
+            Title = "Відкрити ТЦК"
+        };
+        if (dialog.ShowDialog() == true)
+        {
+            var offices = MilitaryOfficeService.LoadAll(officesFile);
+            if (offices.Count == 0)
+            {
+                MessageBox.Show("Файл не містить жодного ТЦК!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var menu = new Menu(dialog.FileName);
+            menu.Show();
+            this.Close();
+        }
+    }
+
 
     private void DragWindow(object sender, MouseButtonEventArgs e)
     {

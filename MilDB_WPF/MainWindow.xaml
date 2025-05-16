@@ -78,7 +78,11 @@
                                 Margin="0,0,30,0" Click="DeleteButton_Click"/>
                         <Button Content="ЗБЕРЕГТИ ТЦК" x:Name="SaveOfficeButton"
                                 Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
-                                Click="SaveOfficeButton_Click"/>
+                                Margin="0,0,10,0" Click="SaveOfficeButton_Click"/>
+                        <Button Content="ВІДКРИТИ ТЦК" x:Name="OpenOfficeButton"
+                                Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
+                                Margin="0,0,10,0" Click="OpenOfficeButton_Click"/>
+
                     </StackPanel>
 
                     <!-- Search -->

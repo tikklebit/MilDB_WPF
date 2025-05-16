@@ -5,12 +5,19 @@ namespace MilDB_WPF;
 
 public partial class Menu : Window
 {
-    private ObservableCollection<MilitaryOffice> _offices;
-    private readonly string _officesFile = "offices.json";
+    private ObservableCollection<MilitaryOffice> _offices = new ObservableCollection<MilitaryOffice>();
+    private readonly string _officesFile;
 
-    public Menu()
+    public Menu() 
     {
         InitializeComponent();
+        _officesFile = "offices.json";
+    }
+
+    public Menu(string officesFile)
+    {
+        InitializeComponent();
+        _officesFile = officesFile;
         LoadOffices();
     }
 
@@ -23,14 +30,14 @@ public partial class Menu : Window
 
     private void SaveOffices()
     {
-        MilitaryOfficeService.SaveAll(_officesFile, _offices);
+        MilitaryOfficeService.SaveAll(_offices);
     }
 
     private void SelectOfficeButton_Click(object sender, RoutedEventArgs e)
     {
         if (OfficeComboBox.SelectedItem is MilitaryOffice selectedOffice)
         {
-            MainWindow main = new MainWindow(selectedOffice);
+            MainWindow main = new MainWindow(selectedOffice, _officesFile);
             main.Show();
             this.Hide();
         }

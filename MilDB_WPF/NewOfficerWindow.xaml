@@ -45,7 +45,7 @@
                         <Label
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Content="НОВИЙ ПРИЗОВНИК"
+                            Content="НОВИЙ ОФІЦЕР"
                             Foreground="White" />
                         <Border
                             Width="40"

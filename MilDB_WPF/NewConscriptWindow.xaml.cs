@@ -52,10 +52,8 @@ public partial class NewConscriptWindow : Window
         var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.1));
         this.BeginAnimation(OpacityProperty, fadeOut);
         await System.Threading.Tasks.Task.Delay(100);
-
         this.Hide();
-        MainWindow mainWindow = new MainWindow(currentOffice);
-        mainWindow.Show();
+
     }
 
     private async void HideButton_Click(object sender, RoutedEventArgs e)
@@ -81,9 +79,6 @@ public partial class NewConscriptWindow : Window
         this.BeginAnimation(OpacityProperty, fadeOut);
         await System.Threading.Tasks.Task.Delay(100);
         this.Hide();
-
-        MainWindow mainWindow = new MainWindow(currentOffice);
-        mainWindow.Show();
     }
 
     private void AddButton_Click(object sender, RoutedEventArgs e)
