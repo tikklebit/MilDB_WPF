@@ -6,9 +6,6 @@ namespace MilDB_WPF;
 
 public static class MilitaryOfficeService
 {
-    private static readonly string DefaultFilePath = Path.Combine(
-        System.AppDomain.CurrentDomain.BaseDirectory, "offices.json");
-
     public static ObservableCollection<MilitaryOffice> LoadAll(string filePath)
     {
         if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
@@ -19,9 +16,9 @@ public static class MilitaryOfficeService
         return new ObservableCollection<MilitaryOffice>(list);
     }
 
-    public static void SaveAll(ObservableCollection<MilitaryOffice> offices)
+    public static void SaveAll(ObservableCollection<MilitaryOffice> offices, string openFile)
     {
         var json = JsonConvert.SerializeObject(offices, Formatting.Indented);
-        File.WriteAllText(DefaultFilePath, json);
+        File.WriteAllText(openFile, json);
     }
 }

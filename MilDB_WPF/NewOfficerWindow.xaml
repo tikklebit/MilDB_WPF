@@ -93,9 +93,12 @@
                         
                         <Label Content="Стаж:" Foreground="White" Margin="0,10,0,5"/>
                         <TextBox x:Name="YearsOfServiceTextBox" Style="{StaticResource GlobalTextBoxStyle}"/>
-                        
-                        <Label Content="Призначений призовник:" Foreground="White" Margin="0,10,0,5"/>
-                        <ComboBox x:Name="ConscriptComboBox" Style="{StaticResource GlobalComboBoxStyle}"/>
+
+                        <GroupBox Header="Призовники" Foreground="White" Margin="0,10,0,0">
+                            <ScrollViewer Height="120">
+                                <StackPanel x:Name="ConscriptsPanel" />
+                            </ScrollViewer>
+                        </GroupBox>
                     </StackPanel>
 
                     <Grid

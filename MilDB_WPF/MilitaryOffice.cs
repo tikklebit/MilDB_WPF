@@ -36,7 +36,6 @@ public class MilitaryOffice
             && !string.IsNullOrWhiteSpace(ServiceArea);
     }
 
-    // Пошук через LINQ
     public ObservableCollection<Conscript> FindConscriptsByFitnessCategory(string category) =>
         new(Conscripts.Where(c => c.FitnessCategory == category));
 

@@ -18,9 +18,9 @@
         <ComboBox x:Name="OfficeComboBox"
                   Width="220"
                   Height="35"
-                  HorizontalAlignment="Center"
+                  HorizontalAlignment="Left"
                   VerticalAlignment="Top"
-                  Margin="0,60,0,0"
+                  Margin="7,61,0,0"
                   FontSize="15"
                   Style="{StaticResource GlobalComboBoxStyle}"
                   DisplayMemberPath="Name"/>
@@ -33,6 +33,15 @@
                 Margin="0,110,0,0"
                 Style="{StaticResource GlobalButtonStyle}"
                 Click="SelectOfficeButton_Click"/>
+        <Button x:Name="OpenFile" 
+                Content="Огляд"
+                Width="100"
+                Height="50"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,54,15,0"
+                Style="{StaticResource GlobalButtonStyle}"
+                Click="OpenOfficeButton_Click"/>
         <Button x:Name="CreateOfficeButton"
                 Content="СТВОРИТИ НОВИЙ ТЦК"
                 Width="220"

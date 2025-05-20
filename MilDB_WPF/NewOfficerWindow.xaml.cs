@@ -1,3 +1,5 @@
+using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,12 +12,14 @@ public partial class NewOfficerWindow : Window
 {
     public Officer? CreatedOfficer { get; private set; }
     private readonly MilitaryOffice currentOffice;
+    private List<CheckBox> conscriptCheckBoxes = new();
 
     public NewOfficerWindow(MilitaryOffice office)
     {
         InitializeComponent();
         currentOffice = office;
-        LoadComboBoxData();
+        LoadRanks();
+        LoadConscriptsList();
         StateChanged += NOW_StateChanged;
     }
 
@@ -23,29 +27,49 @@ public partial class NewOfficerWindow : Window
     {
         InitializeComponent();
         currentOffice = office;
-        LoadComboBoxData();
+        LoadRanks();
+        LoadConscriptsList();
         FullNameTextBox.Text = officer.FullName;
         RankComboBox.Text = officer.Rank;
         YearsOfServiceTextBox.Text = officer.YearsOfService.ToString();
+        foreach (var cb in conscriptCheckBoxes)
+        {
+            if (officer.AssignedConscripts.Contains((Conscript)cb.Tag))
+                cb.IsChecked = true;
+        }
         StateChanged += NOW_StateChanged;
     }
 
-    private void LoadComboBoxData()
+    private void LoadRanks()
     {
-        List<string> ranks = new List<string>
-        {
-            "Солдат", "Старший солдат", "Молодший сержант", "Сержант", "Старший сержант",
-            "Старшина", "Прапорщик", "Молодший лейтенант", "Лейтенант", "Старший лейтенант",
-            "Капітан", "Майор", "Підполковник", "Полковник", "Генерал-майор",
-            "Генерал-лейтенант", "Генерал-полковник", "Генерал армії України"
-        };
+        List<string> ranks = new()
+    {
+        "Солдат", "Старший солдат", "Молодший сержант", "Сержант", "Старший сержант",
+        "Старшина", "Прапорщик", "Молодший лейтенант", "Лейтенант", "Старший лейтенант",
+        "Капітан", "Майор", "Підполковник", "Полковник", "Генерал-майор",
+        "Генерал-лейтенант", "Генерал-полковник", "Генерал армії України"
+    };
         RankComboBox.ItemsSource = ranks;
-
-        ConscriptComboBox.ItemsSource = currentOffice.Conscripts;
-        ConscriptComboBox.DisplayMemberPath = "FullName";
     }
 
+    private void LoadConscriptsList()
+    {
+        ConscriptsPanel.Children.Clear();
+        conscriptCheckBoxes.Clear();
 
+        foreach (var conscript in currentOffice.Conscripts)
+        {
+            var cb = new CheckBox
+            {
+                Content = conscript.FullName,
+                Tag = conscript,
+                Margin = new Thickness(2),
+                Foreground = Brushes.White
+            };
+            conscriptCheckBoxes.Add(cb);
+            ConscriptsPanel.Children.Add(cb);
+        }
+    }
 
     private void DragWindow(object sender, MouseButtonEventArgs e)
     {
@@ -90,20 +114,46 @@ public partial class NewOfficerWindow : Window
     {
         string name = FullNameTextBox.Text.Trim();
         string rank = RankComboBox.Text;
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            ShowError("ПІБ не може бути порожнім!");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(rank))
+        {
+            ShowError("Виберіть звання!");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(YearsOfServiceTextBox.Text))
+        {
+            ShowError("Вкажіть стаж служби!");
+            return;
+        }
+
+        if (!IsValidFullName(name))
+        {
+            ShowError("ПІБ має містити лише літери, починатися з великої, слова розділені пробілом або дефісом.");
+            return;
+        }
+
         int yearsOfService;
         if (!int.TryParse(YearsOfServiceTextBox.Text, out yearsOfService))
         {
-            ErrorLabel.Content = "Некоректний стаж!";
-            ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
-            ErrorLabel.Visibility = Visibility.Visible;
+            ShowError("Некоректний стаж!");
             return;
         }
 
         var officer = new Officer(name, rank, yearsOfService);
-        if (ConscriptComboBox.SelectedItem is Conscript selectedConscript)
+
+        foreach (var cb in conscriptCheckBoxes)
         {
-            officer.AssignedConscripts.Add(selectedConscript);
+            if (cb.IsChecked == true && cb.Tag is Conscript conscript)
+                officer.AssignedConscripts.Add(conscript);
         }
+
         if (officer.Valid())
         {
             CreatedOfficer = officer;
@@ -112,10 +162,23 @@ public partial class NewOfficerWindow : Window
         }
         else
         {
-            ErrorLabel.Content = "Введені дані некоректні!";
-            ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
-            ErrorLabel.Visibility = Visibility.Visible;
+            ShowError("Введені дані некоректні!");
         }
     }
 
+    private void ShowError(string message)
+    {
+        ErrorLabel.Content = message;
+        ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
+        ErrorLabel.Visibility = Visibility.Visible;
+    }
+
+    private static bool IsValidFullName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return false;
+        var flexibleRegex = new Regex(@"^[А-ЯІЇЄҐ][а-яіїєґ'-]*(?:[ \-][А-ЯІЇЄҐ][а-яіїєґ'-]*)*$");
+
+        return flexibleRegex.IsMatch(name);
+    }
 }

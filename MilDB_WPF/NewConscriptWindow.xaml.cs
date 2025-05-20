@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -11,7 +13,6 @@ public partial class NewConscriptWindow : Window
     public Conscript? CreatedConscript { get; private set; }
     private readonly MilitaryOffice currentOffice;
 
-    // Додавання конструктора з office для коректної навігації
     public NewConscriptWindow(MilitaryOffice office)
     {
         InitializeComponent();
@@ -19,12 +20,10 @@ public partial class NewConscriptWindow : Window
         StateChanged += NCW_StateChanged;
     }
 
-    // Для редагування
     public NewConscriptWindow(Conscript conscript, MilitaryOffice office)
     {
         InitializeComponent();
         currentOffice = office;
-        // Заповнення полів
         FullNameTextBox.Text = conscript.FullName;
         BirthDatePicker.SelectedDate = conscript.BirthDate;
         AddressTextBox.Text = conscript.Address;
@@ -34,7 +33,6 @@ public partial class NewConscriptWindow : Window
         StateChanged += NCW_StateChanged;
     }
 
-    // Для сумісності зі старим кодом (не рекомендується використовувати)
     public NewConscriptWindow()
     {
         InitializeComponent();
@@ -53,7 +51,6 @@ public partial class NewConscriptWindow : Window
         this.BeginAnimation(OpacityProperty, fadeOut);
         await System.Threading.Tasks.Task.Delay(100);
         this.Hide();
-
     }
 
     private async void HideButton_Click(object sender, RoutedEventArgs e)
@@ -90,11 +87,40 @@ public partial class NewConscriptWindow : Window
         string fitnessCategory = FitnessCategoryComboBox.Text;
         string status = StatusComboBox.Text;
 
+        if (!IsValidFullName(name))
+        {
+            ShowError("ПІБ має містити лише літери, починатися з великої, слова розділені пробілом або дефісом.");
+            return;
+        }
         if (birthDate == null)
         {
-            ErrorLabel.Content = "Вкажіть дату народження!";
-            ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
-            ErrorLabel.Visibility = Visibility.Visible;
+            ShowError("Вкажіть дату народження!");
+            return;
+        }
+        int age = GetAge(birthDate.Value, DateTime.Today);
+        if (age < 18 || age > 27)
+        {
+            ShowError("Вік призовника має бути від 18 до 27 років.");
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(address))
+        {
+            ShowError("Вкажіть адресу!");
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(healthStatus))
+        {
+            ShowError("Вкажіть стан здоров'я!");
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(fitnessCategory))
+        {
+            ShowError("Вкажіть категорію придатності!");
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(status))
+        {
+            ShowError("Вкажіть статус!");
             return;
         }
 
@@ -107,9 +133,31 @@ public partial class NewConscriptWindow : Window
         }
         else
         {
-            ErrorLabel.Content = "Введені дані некоректні!";
-            ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
-            ErrorLabel.Visibility = Visibility.Visible;
+            ShowError("Введені дані некоректні!");
         }
+    }
+
+    private void ShowError(string message)
+    {
+        ErrorLabel.Content = message;
+        ErrorLabel.Foreground = new SolidColorBrush(Colors.Red);
+        ErrorLabel.Visibility = Visibility.Visible;
+    }
+
+    private static int GetAge(DateTime birthDate, DateTime now)
+    {
+        int age = now.Year - birthDate.Year;
+        if (now.Month < birthDate.Month || (now.Month == birthDate.Month && now.Day < birthDate.Day))
+            age--;
+        return age;
+    }
+
+    private static bool IsValidFullName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return false;
+        var flexibleRegex = new Regex(@"^[А-ЯІЇЄҐ][а-яіїєґ'-]*(?:[ \-][А-ЯІЇЄҐ][а-яіїєґ'-]*)*$");
+
+        return flexibleRegex.IsMatch(name);
     }
 }
