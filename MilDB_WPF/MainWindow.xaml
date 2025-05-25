@@ -57,11 +57,11 @@
                 </Border>
 
                 <StackPanel Orientation="Vertical" Margin="0,40,0,10">
-                    <Menu x:Name="MainMenu" Background="Black" Foreground="White" Opacity="0.98">
+                    <Menu x:Name="MainMenu" Background="Black" Foreground="White">
                         <MenuItem Header="ФАЙЛ">
                             <MenuItem Background="DarkSlateGray" Header="ЗБЕРЕГТИ" Click="SaveOfficeButton_Click"/>
                             <MenuItem Background="Black" Header="ВІДКРИТИ" Click="OpenOfficeButton_Click"/>
-                            <MenuItem Background="Black" Header="ВИХІД" Click="CloseButton_Click"/>
+                            <MenuItem Background="DarkSlateGray" Header="ВИХІД" Click="CloseButton_Click"/>
                         </MenuItem>
                         <MenuItem Header="ДІЇ">
                             <MenuItem Background="DarkSlateGray" Header="ДОДАТИ" Click="AddButton_Click"/>
