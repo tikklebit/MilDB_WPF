@@ -133,7 +133,7 @@
                     </Grid>
                 </Grid>
                 <Label x:Name="ErrorLabel"
-                       Margin="30, 300, 0, 90"
+                       Margin="30, 430, 0, 90"
                        Foreground="Red"
                        FontSize="14"
                        Visibility="Collapsed"

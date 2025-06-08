@@ -3,37 +3,40 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="ТАБЛИЦЯ"
-    Width="1200"
-    Height="700"
-    WindowStyle="None"
+    Width="1800"
+    Height="900"
     AllowsTransparency="True"
     Background="Transparent"
-    WindowStartupLocation="CenterScreen">
-
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None">
     <Grid>
         <Border
             x:Name="BGBorder"
-            CornerRadius="20"
             Background="#FF2E2E2E"
+            CornerRadius="20"
             Opacity="0.95">
             <Grid>
                 <Border
                     x:Name="TopMenuBorder"
-                    CornerRadius="20,20,0,0"
                     Height="40"
                     VerticalAlignment="Top"
                     Background="Black"
-                    Opacity="0.98"
-                    MouseLeftButtonDown="DragWindow">
+                    CornerRadius="20,20,0,0"
+                    MouseLeftButtonDown="DragWindow"
+                    Opacity="0.98">
                     <Grid>
                         <Label
                             x:Name="Title"
-                            Content="ТАБЛИЦЯ"
-                            Foreground="White"
-                            FontSize="18"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center"/>
-                        <Border Width="40" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top">
+                            VerticalAlignment="Center"
+                            Content="ТАБЛИЦЯ"
+                            FontSize="18"
+                            Foreground="White" />
+                        <Border
+                            Width="40"
+                            Height="25"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top">
                             <Button
                                 Width="40"
                                 Height="25"
@@ -43,7 +46,11 @@
                                 Click="CloseButton_Click"
                                 Style="{StaticResource TopBarButtonStyle}" />
                         </Border>
-                        <Border Width="40" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Border
+                            Width="40"
+                            Height="25"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
                             <Button
                                 Width="40"
                                 Height="25"
@@ -55,90 +62,210 @@
                         </Border>
                     </Grid>
                 </Border>
-
-                <StackPanel Orientation="Vertical" Margin="0,40,0,10">
-                    <Menu x:Name="MainMenu" Background="Black" Foreground="White">
+                <StackPanel Margin="0,40,0,10" Orientation="Vertical">
+                    <Menu
+                        x:Name="MainMenu"
+                        Background="Black"
+                        Foreground="White">
                         <MenuItem Header="ФАЙЛ">
-                            <MenuItem Background="DarkSlateGray" Header="ЗБЕРЕГТИ" Click="SaveOfficeButton_Click"/>
-                            <MenuItem Background="Black" Header="ВІДКРИТИ" Click="OpenOfficeButton_Click"/>
-                            <MenuItem Background="DarkSlateGray" Header="ВИХІД" Click="CloseButton_Click"/>
+                            <MenuItem
+                                Background="DarkSlateGray"
+                                Click="SaveOfficeButton_Click"
+                                Header="ЗБЕРЕГТИ" />
+                            <MenuItem
+                                Background="Black"
+                                Click="OpenOfficeButton_Click"
+                                Header="ВІДКРИТИ" />
+                            <MenuItem
+                                Background="DarkSlateGray"
+                                Click="CloseButton_Click"
+                                Header="ВИХІД" />
                         </MenuItem>
                         <MenuItem Header="ДІЇ">
-                            <MenuItem Background="DarkSlateGray" Header="ДОДАТИ" Click="AddButton_Click"/>
-                            <MenuItem Background="Black" Header="РЕДАГУВАТИ" Click="EditButton_Click"/>
-                            <MenuItem Background="DarkSlateGray" Header="ВИДАЛИТИ" Click="DeleteButton_Click"/>
+                            <MenuItem Background="DarkSlateGray" Header="ДОДАТИ">
+                                <MenuItem
+                                    Background="Black"
+                                    Click="AddConscriptButton_Click"
+                                    Header="ПРИЗОВНИКА" />
+                                <MenuItem
+                                    Background="DarkSlateGray"
+                                    Click="AddOfficerButton_Click"
+                                    Header="ОФІЦЕРА" />
+                            </MenuItem>
+                            <MenuItem
+                                Background="Black"
+                                Click="EditButton_Click"
+                                Header="РЕДАГУВАТИ" />
+                            <MenuItem
+                                Background="DarkSlateGray"
+                                Click="DeleteButton_Click"
+                                Header="ВИДАЛИТИ" />
                         </MenuItem>
                     </Menu>
                 </StackPanel>
-
-                <StackPanel Orientation="Vertical" Margin="20,80,20,20">
-
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
-                        <Button Content="ПРИЗОВНИКИ" x:Name="ConscriptTableButton"
-                                Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
-                                Margin="0,0,10,0" Click="ConscriptTableButton_Click"/>
-                        <Button Content="ОФІЦЕРИ" x:Name="OfficerTableButton"
-                                Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
-                                Margin="0,0,30,0" Click="OfficerTableButton_Click"/>
-                        <Button Content="ДОДАТИ" x:Name="AddButton"
-                                Style="{StaticResource GlobalButtonStyle}" Width="120" Height="60"
-                                Margin="0,0,10,0" Click="AddButton_Click"/>
-                        <Button Content="РЕДАГУВАТИ" x:Name="EditButton"
-                                Style="{StaticResource GlobalButtonStyle}" Width="120" Height="60"
-                                Margin="0,0,10,0" Click="EditButton_Click"/>
-                        <Button Content="ВИДАЛИТИ" x:Name="DeleteButton"
-                                Style="{StaticResource GlobalButtonStyle}" Width="120" Height="60"
-                                Margin="0,0,30,0" Click="DeleteButton_Click"/>
-                        <Button Content="ЗБЕРЕГТИ ТЦК" x:Name="SaveOfficeButton"
-                                Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
-                                Margin="0,0,10,0" Click="SaveOfficeButton_Click"/>
-                        <Button Content="ВІДКРИТИ ТЦК" x:Name="OpenOfficeButton"
-                                Style="{StaticResource GlobalButtonStyle}" Width="140" Height="60"
-                                Margin="0,0,10,0" Click="OpenOfficeButton_Click"/>
-
+                <StackPanel Margin="20,80,20,20" Orientation="Vertical">
+                    <StackPanel
+                        Margin="0,0,0,10"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                        <Button
+                            x:Name="ConscriptTableButton"
+                            Width="140"
+                            Height="60"
+                            Margin="0,0,10,0"
+                            Click="ConscriptTableButton_Click"
+                            Content="ПРИЗОВНИКИ"
+                            Style="{StaticResource GlobalButtonStyle}" />
+                        <Button
+                            x:Name="OfficerTableButton"
+                            Width="140"
+                            Height="60"
+                            Margin="0,0,30,0"
+                            Click="OfficerTableButton_Click"
+                            Content="ОФІЦЕРИ"
+                            Style="{StaticResource GlobalButtonStyle}" />
+                        <Button
+                            x:Name="AddConscriptButton"
+                            Width="200"
+                            Height="60"
+                            Margin="0,0,10,0"
+                            Click="AddConscriptButton_Click"
+                            Content="ДОДАТИ ПРИЗОВНИКА"
+                            Style="{StaticResource GlobalButtonStyle}" />
+                        <Button
+                            x:Name="AddOfficerButton"
+                            Width="200"
+                            Height="60"
+                            Margin="0,0,30,0"
+                            Click="AddOfficerButton_Click"
+                            Content="ДОДАТИ ОФІЦЕРА"
+                            Style="{StaticResource GlobalButtonStyle}" />
+                        <Button
+                            x:Name="EditButton"
+                            Width="120"
+                            Height="60"
+                            Margin="0,0,10,0"
+                            Click="EditButton_Click"
+                            Content="РЕДАГУВАТИ"
+                            Style="{StaticResource GlobalButtonStyle}" />
+                        <Button
+                            x:Name="DeleteButton"
+                            Width="120"
+                            Height="60"
+                            Margin="0,0,30,0"
+                            Click="DeleteButton_Click"
+                            Content="ВИДАЛИТИ"
+                            Style="{StaticResource GlobalButtonStyle}" />
+                        <Button
+                            x:Name="SaveOfficeButton"
+                            Width="140"
+                            Height="60"
+                            Margin="0,0,10,0"
+                            Click="SaveOfficeButton_Click"
+                            Content="ЗБЕРЕГТИ У ФАЙЛ"
+                            Style="{StaticResource GlobalButtonStyle}" />
+                        <Button
+                            x:Name="OpenOfficeButton"
+                            Width="140"
+                            Height="60"
+                            Margin="0,0,10,0"
+                            Click="OpenOfficeButton_Click"
+                            Content="ВІДКРИТИ ФАЙЛ"
+                            Style="{StaticResource GlobalButtonStyle}" />
                     </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Label Content="Пошук:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-                        <TextBox x:Name="SearchTextBox" Width="300" Height="35" FontSize="15"
-                                 Style="{StaticResource GlobalTextBoxStyle}" Margin="10,0,0,0"
-                                 TextChanged="SearchTextBox_TextChanged"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Label Content="Сортувати за:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="SortComboBox" Width="200" Height="35" FontSize="15" Margin="10,0,0,0"
-              Style="{StaticResource GlobalComboBoxStyle}">
-                            <ComboBoxItem Content="ПІБ" Tag="Name"/>
-                            <ComboBoxItem Content="Адреса" Tag="Address"/>
-                            <ComboBoxItem Content="Дата народження" Tag="BirthDate"/>
-                            <ComboBoxItem Content="Стаж (офіцери)" Tag="YearsOfService"/>
-                            <ComboBoxItem Content="Звання (офіцери)" Tag="Rank"/>
+                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                        <Label
+                            VerticalAlignment="Center"
+                            Content="Фільтр:"
+                            FontSize="15"
+                            Foreground="White" />
+                        <ComboBox
+                            x:Name="FilterTypeComboBox"
+                            Width="180"
+                            Height="35"
+                            Margin="10,0,0,0"
+                            FontSize="15"
+                            SelectionChanged="FilterTypeComboBox_SelectionChanged"
+                            Style="{StaticResource GlobalComboBoxStyle}">
+                            <ComboBoxItem
+                                Content="ПІБ"
+                                IsSelected="True"
+                                Tag="FullName" />
+                            <ComboBoxItem Content="Адреса" Tag="Address" />
+                            <ComboBoxItem Content="Категорія придатності" Tag="FitnessCategory" />
+                            <ComboBoxItem Content="Статус" Tag="Status" />
+                            <ComboBoxItem Content="Звання" Tag="Rank" />
+                            <ComboBoxItem Content="Стаж" Tag="YearsOfService" />
                         </ComboBox>
-                        <Button Content="СОРТУВАТИ" Width="170" Height="50" Margin="10,0,0,0"
-            Style="{StaticResource GlobalButtonStyle}" Click="SortButton_Click"/>
+                        <TextBox
+                            x:Name="FilterTextBox"
+                            Width="300"
+                            Height="35"
+                            Margin="10,0,0,0"
+                            FontSize="15"
+                            Style="{StaticResource GlobalTextBoxStyle}"
+                            TextChanged="FilterTextBox_TextChanged" />
                     </StackPanel>
-
-                    <DataGrid x:Name="DataGrid"
-                              Style="{StaticResource GlobalDataGridStyle}"
-                              IsReadOnly="True"
-                              SelectionMode="Single"
-                              Height="443"/>
-
-                    <StackPanel x:Name="OfficersSP" Orientation="Horizontal" Margin="0,10,0,0" Visibility="Collapsed" IsEnabled="False">
-                        <DataGrid x:Name="OfficersDataGrid"
-                                  Style="{StaticResource GlobalDataGridStyle}"
-                                  IsReadOnly="True"
-                                  SelectionMode="Single"
-                                  Height="443"
-                                  Width="350"
-                                  Margin="0,0,50,0"/>
-                        <DataGrid x:Name="CfODataGrid"
-                                  Style="{StaticResource GlobalDataGridStyle}"
-                                  IsReadOnly="True"
-                                  SelectionMode="Single"
-                                  Height="443"
-                                  Width="750"/>
+                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                        <Label
+                            VerticalAlignment="Center"
+                            Content="Сортувати за:"
+                            FontSize="15"
+                            Foreground="White" />
+                        <ComboBox
+                            x:Name="SortComboBox"
+                            Width="200"
+                            Height="35"
+                            Margin="10,0,0,0"
+                            FontSize="15"
+                            Style="{StaticResource GlobalComboBoxStyle}">
+                            <ComboBoxItem Content="ПІБ" Tag="Name" />
+                            <ComboBoxItem Content="Адреса" Tag="Address" />
+                            <ComboBoxItem Content="Дата народження" Tag="BirthDate" />
+                            <ComboBoxItem Content="Стаж" Tag="YearsOfService" />
+                            <ComboBoxItem Content="Звання" Tag="Rank" />
+                        </ComboBox>
+                        <Button
+                            Width="170"
+                            Height="50"
+                            Margin="10,0,0,0"
+                            Click="SortButton_Click"
+                            Content="СОРТУВАТИ"
+                            Style="{StaticResource GlobalButtonStyle}" />
+                    </StackPanel>
+                    <Label
+                        x:Name="OpenedTable"
+                        HorizontalAlignment="Center"
+                        Content="ТАБЛИЦЯ ПРИЗОВНИКІВ"
+                        FontSize="30"
+                        Foreground="White" />
+                    <DataGrid
+                        x:Name="DataGrid"
+                        Height="543"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
+                        Style="{StaticResource GlobalDataGridStyle}" />
+                    <StackPanel
+                        x:Name="OfficersSP"
+                        Margin="0,10,0,0"
+                        IsEnabled="False"
+                        Orientation="Horizontal"
+                        Visibility="Collapsed">
+                        <DataGrid
+                            x:Name="OfficersDataGrid"
+                            Width="700"
+                            Height="543"
+                            Margin="0,0,50,0"
+                            IsReadOnly="True"
+                            SelectionMode="Single"
+                            Style="{StaticResource GlobalDataGridStyle}" />
+                        <DataGrid
+                            x:Name="CfODataGrid"
+                            Width="1000"
+                            Height="543"
+                            IsReadOnly="True"
+                            SelectionMode="Single"
+                            Style="{StaticResource GlobalDataGridStyle}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

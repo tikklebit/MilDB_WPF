@@ -22,6 +22,78 @@ public partial class MainWindow : Window
         Title.Content = $"ТАБЛИЦЯ - {currentOffice.Name}";
         ShowConscripts();
         OfficersDataGrid.SelectionChanged += OfficersDataGrid_SelectionChanged;
+        UpdateFilterComboBox();
+        UpdateSortComboBox();
+    }
+
+    private void UpdateFilterComboBox()
+    {
+        if (showingConscripts)
+        {
+            foreach (ComboBoxItem item in FilterTypeComboBox.Items)
+            {
+                string tag = item.Tag as string;
+                item.Visibility = (tag == "FullName" || tag == "Address" || tag == "FitnessCategory" || tag == "Status")
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+            }
+            if (FilterTypeComboBox.SelectedItem is ComboBoxItem selected &&
+                (selected.Tag as string == "Rank" || selected.Tag as string == "YearsOfService"))
+            {
+                FilterTypeComboBox.SelectedIndex = 0;
+            }
+        }
+        else
+        {
+            foreach (ComboBoxItem item in FilterTypeComboBox.Items)
+            {
+                string tag = item.Tag as string;
+                item.Visibility = (tag == "FullName" || tag == "Rank" || tag == "YearsOfService")
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+            }
+            if (FilterTypeComboBox.SelectedItem is ComboBoxItem selected &&
+                (selected.Tag as string == "Address" || selected.Tag as string == "FitnessCategory" || selected.Tag as string == "Status"))
+            {
+                FilterTypeComboBox.SelectedIndex = 0;
+            }
+        }
+    }
+
+    private void UpdateSortComboBox()
+    {
+        if (SortComboBox == null) return;
+
+        if (showingConscripts)
+        {
+            foreach (ComboBoxItem item in SortComboBox.Items)
+            {
+                string tag = item.Tag as string;
+                item.Visibility = (tag == "Name" || tag == "Address" || tag == "BirthDate")
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+            }
+            if (SortComboBox.SelectedItem is ComboBoxItem selected &&
+                (selected.Tag as string == "YearsOfService" || selected.Tag as string == "Rank"))
+            {
+                SortComboBox.SelectedIndex = 0;
+            }
+        }
+        else
+        {
+            foreach (ComboBoxItem item in SortComboBox.Items)
+            {
+                string tag = item.Tag as string;
+                item.Visibility = (tag == "Name" || tag == "YearsOfService" || tag == "Rank")
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+            }
+            if (SortComboBox.SelectedItem is ComboBoxItem selected &&
+                (selected.Tag as string == "Address" || selected.Tag as string == "BirthDate"))
+            {
+                SortComboBox.SelectedIndex = 0;
+            }
+        }
     }
 
     private void ShowConscripts()
@@ -71,8 +143,11 @@ public partial class MainWindow : Window
         });
 
         showingConscripts = true;
-        SearchTextBox.Text = string.Empty;
+        FilterTextBox.Text = string.Empty;
         DataGrid.AutoGenerateColumns = false;
+        OpenedTable.Content = "ТАБЛИЦЯ ПРИЗОВНИКІВ";
+        UpdateFilterComboBox();
+        UpdateSortComboBox();
     }
 
     private void ShowOfficers()
@@ -144,9 +219,12 @@ public partial class MainWindow : Window
         });
 
         showingConscripts = false;
-        SearchTextBox.Text = string.Empty;
+        FilterTextBox.Text = string.Empty;
         OfficersDataGrid.AutoGenerateColumns = false;
         CfODataGrid.AutoGenerateColumns = false;
+        OpenedTable.Content = "ТАБЛИЦЯ ОФІЦЕРІВ";
+        UpdateFilterComboBox();
+        UpdateSortComboBox();
     }
 
     private void OfficersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -165,27 +243,25 @@ public partial class MainWindow : Window
 
     private void OfficerTableButton_Click(object sender, RoutedEventArgs e) => ShowOfficers();
 
-    private void AddButton_Click(object sender, RoutedEventArgs e)
+    private void AddConscriptButton_Click(object sender, RoutedEventArgs e)
     {
-        if (showingConscripts)
+        var window = new NewConscriptWindow(currentOffice);
+        if (window.ShowDialog() == true && window.CreatedConscript != null && window.CreatedConscript.Valid())
         {
-            var window = new NewConscriptWindow(currentOffice);
-            if (window.ShowDialog() == true && window.CreatedConscript != null && window.CreatedConscript.Valid())
-            {
-                currentOffice.Conscripts.Add(window.CreatedConscript);
-                SaveAllOffices();
-                DataGrid.ItemsSource = currentOffice.Conscripts;
-            }
+            currentOffice.Conscripts.Add(window.CreatedConscript);
+            SaveAllOffices();
+            FilterTextBox_TextChanged(null, null);
         }
-        else
+    }
+
+    private void AddOfficerButton_Click(object sender, RoutedEventArgs e)
+    {
+        var window = new NewOfficerWindow(currentOffice);
+        if (window.ShowDialog() == true && window.CreatedOfficer != null && window.CreatedOfficer.Valid())
         {
-            var window = new NewOfficerWindow(currentOffice);
-            if (window.ShowDialog() == true && window.CreatedOfficer != null && window.CreatedOfficer.Valid())
-            {
-                currentOffice.Officers.Add(window.CreatedOfficer);
-                SaveAllOffices();
-                OfficersDataGrid.ItemsSource = currentOffice.Officers;
-            }
+            currentOffice.Officers.Add(window.CreatedOfficer);
+            SaveAllOffices();
+            FilterTextBox_TextChanged(null, null);
         }
     }
 
@@ -205,7 +281,7 @@ public partial class MainWindow : Window
                 if (idx >= 0)
                     currentOffice.Conscripts[idx] = window.CreatedConscript;
                 SaveAllOffices();
-                DataGrid.ItemsSource = currentOffice.Conscripts;
+                FilterTextBox_TextChanged(null, null);
             }
         }
         else
@@ -222,7 +298,7 @@ public partial class MainWindow : Window
                 if (idx >= 0)
                     currentOffice.Officers[idx] = window.CreatedOfficer;
                 SaveAllOffices();
-                OfficersDataGrid.ItemsSource = currentOffice.Officers;
+                FilterTextBox_TextChanged(null, null);
                 CfODataGrid.ItemsSource = officer.AssignedConscripts;
             }
         }
@@ -239,7 +315,7 @@ public partial class MainWindow : Window
             }
             currentOffice.Conscripts.Remove(conscript);
             SaveAllOffices();
-            DataGrid.ItemsSource = currentOffice.Conscripts;
+            FilterTextBox_TextChanged(null, null);
         }
         else
         {
@@ -250,95 +326,116 @@ public partial class MainWindow : Window
             }
             currentOffice.Officers.Remove(officer);
             SaveAllOffices();
-            OfficersDataGrid.ItemsSource = currentOffice.Officers;
+            FilterTextBox_TextChanged(null, null);
             CfODataGrid.ItemsSource = null;
         }
     }
 
-    private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    private ObservableCollection<Conscript> SortConscripts(List<Conscript> conscriptsList, string sortCriteria)
     {
-        string search = SearchTextBox.Text.Trim().ToLower();
+        if (string.IsNullOrEmpty(sortCriteria))
+        {
+            return new ObservableCollection<Conscript>(conscriptsList);
+        }
+
+        switch (sortCriteria)
+        {
+            case "Name":
+                conscriptsList = conscriptsList.OrderBy(c => c.FullName).ToList();
+                break;
+            case "Address":
+                conscriptsList = conscriptsList.OrderBy(c => c.Address).ToList();
+                break;
+            case "BirthDate":
+                conscriptsList = conscriptsList.OrderBy(c => c.BirthDate).ToList();
+                break;
+        }
+        return new ObservableCollection<Conscript>(conscriptsList);
+    }
+
+    private ObservableCollection<Officer> SortOfficers(List<Officer> officersList, string sortCriteria)
+    {
+        if (string.IsNullOrEmpty(sortCriteria))
+        {
+            return new ObservableCollection<Officer>(officersList);
+        }
+
+        switch (sortCriteria)
+        {
+            case "Name":
+                officersList = officersList.OrderBy(o => o.FullName).ToList();
+                break;
+            case "YearsOfService":
+                officersList = officersList.OrderBy(o => o.YearsOfService).ToList();
+                break;
+            case "Rank":
+                officersList = officersList.OrderBy(o => o.Rank).ToList();
+                break;
+        }
+        return new ObservableCollection<Officer>(officersList);
+    }
+
+    private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        string sortCriteria = null;
+        if (SortComboBox?.SelectedItem is ComboBoxItem sortSelectedItem && sortSelectedItem.Tag is string tag)
+        {
+            sortCriteria = tag;
+        }
+
+        if (FilterTypeComboBox == null || FilterTextBox == null || FilterTypeComboBox.SelectedItem is not ComboBoxItem selectedItem ||
+            selectedItem.Tag == null || currentOffice == null || DataGrid == null || OfficersDataGrid == null)
+        {
+            if (showingConscripts && DataGrid != null)
+            {
+                var conscripts = currentOffice?.Conscripts ?? new ObservableCollection<Conscript>();
+                DataGrid.ItemsSource = SortConscripts(conscripts.ToList(), sortCriteria);
+            }
+            else if (!showingConscripts && OfficersDataGrid != null)
+            {
+                var officers = currentOffice?.Officers ?? new ObservableCollection<Officer>();
+                OfficersDataGrid.ItemsSource = SortOfficers(officers.ToList(), sortCriteria);
+            }
+            return;
+        }
+
+        string criteria = selectedItem.Tag as string;
+        string filterValue = FilterTextBox.Text.Trim();
+
         if (showingConscripts)
         {
-            if (string.IsNullOrEmpty(search))
-                DataGrid.ItemsSource = currentOffice.Conscripts;
-            else
-                DataGrid.ItemsSource = new ObservableCollection<Conscript>(
-                    currentOffice.Conscripts.Where(c => c.FullName.ToLower().Contains(search)));
+            var filteredConscripts = currentOffice?.Conscripts != null
+                ? currentOffice.FilterConscripts(criteria, filterValue)
+                : new ObservableCollection<Conscript>();
+            DataGrid.ItemsSource = SortConscripts(filteredConscripts.ToList(), sortCriteria);
         }
         else
         {
-            if (string.IsNullOrEmpty(search))
-                OfficersDataGrid.ItemsSource = currentOffice.Officers;
-            else
-                OfficersDataGrid.ItemsSource = new ObservableCollection<Officer>(
-                    currentOffice.Officers.Where(o => o.FullName.ToLower().Contains(search)));
+            var filteredOfficers = currentOffice?.Officers != null
+                ? currentOffice.FilterOfficers(criteria, filterValue)
+                : new ObservableCollection<Officer>();
+            OfficersDataGrid.ItemsSource = SortOfficers(filteredOfficers.ToList(), sortCriteria);
         }
+    }
+
+    private void FilterTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        FilterTextBox_TextChanged(sender, null);
+    }
+
+    private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        FilterTextBox_TextChanged(sender, null);
     }
 
     private void SortButton_Click(object sender, RoutedEventArgs e)
     {
-        if (SortComboBox.SelectedItem is ComboBoxItem selectedItem)
-        {
-            string? sortCriteria = selectedItem.Tag as string;
-
-            if (string.IsNullOrEmpty(sortCriteria))
-            {
-                MessageBox.Show("Оберіть критерій сортування.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (showingConscripts)
-            {
-                var conscriptsList = currentOffice.Conscripts.ToList();
-
-                switch (sortCriteria)
-                {
-                    case "Name":
-                        conscriptsList = conscriptsList.OrderBy(c => c.FullName).ToList();
-                        break;
-                    case "Address":
-                        conscriptsList = conscriptsList.OrderBy(c => c.Address).ToList();
-                        break;
-                    case "BirthDate":
-                        conscriptsList = conscriptsList.OrderBy(c => c.BirthDate).ToList();
-                        break;
-                    default:
-                        MessageBox.Show($"Непідтримуваний критерій сортування для призовників: {sortCriteria}", "Помилка сортування", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                }
-
-                DataGrid.ItemsSource = new ObservableCollection<Conscript>(conscriptsList);
-            }
-            else
-            {
-                var officersList = currentOffice.Officers.ToList();
-                switch (sortCriteria)
-                {
-                    case "Name":
-                        officersList = officersList.OrderBy(o => o.FullName).ToList();
-                        break;
-                    case "YearsOfService":
-                        officersList = officersList.OrderBy(o => o.YearsOfService).ToList();
-                        break;
-                    case "Rank":
-                        officersList = officersList.OrderBy(o => o.Rank).ToList();
-                        break;
-                    default:
-                        MessageBox.Show($"Непідтримуваний критерій сортування для офіцерів: {sortCriteria}", "Помилка сортування", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                }
-
-                OfficersDataGrid.ItemsSource = new ObservableCollection<Officer>(officersList);
-            }
-
-            if (showingConscripts) DataGrid.Items.Refresh();
-            else OfficersDataGrid.Items.Refresh();
-        }
-        else
+        if (SortComboBox.SelectedItem is not ComboBoxItem selectedItem || selectedItem.Tag is not string sortCriteria || string.IsNullOrEmpty(sortCriteria))
         {
             MessageBox.Show("Оберіть критерій сортування.", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
         }
+        FilterTextBox_TextChanged(SortComboBox, null);
     }
 
     private void SaveAllOffices()
@@ -378,7 +475,7 @@ public partial class MainWindow : Window
         };
         if (dialog.ShowDialog() == true)
         {
-            var offices = MilitaryOfficeService.LoadAll(officesFile);
+            var offices = MilitaryOfficeService.LoadAll(dialog.FileName);
             if (offices.Count == 0)
             {
                 MessageBox.Show("Файл не містить жодного ТЦК!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);

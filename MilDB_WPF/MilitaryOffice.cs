@@ -36,18 +36,50 @@ public class MilitaryOffice
             && !string.IsNullOrWhiteSpace(ServiceArea);
     }
 
-    public ObservableCollection<Conscript> FindConscriptsByFitnessCategory(string category) =>
-        new(Conscripts.Where(c => c.FitnessCategory == category));
+    public ObservableCollection<Conscript> FilterConscripts(string criteria, string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return new ObservableCollection<Conscript>(Conscripts);
 
-    public ObservableCollection<Conscript> FindConscriptsByStatus(string status) =>
-        new(Conscripts.Where(c => c.Status == status));
+        switch (criteria)
+        {
+            case "FullName":
+                return new ObservableCollection<Conscript>(
+                    Conscripts.Where(c => c.FullName.ToLower().Contains(value.ToLower())));
+            case "Address":
+                return new ObservableCollection<Conscript>(
+                    Conscripts.Where(c => !string.IsNullOrEmpty(c.Address) && c.Address.ToLower().Contains(value.ToLower())));
+            case "FitnessCategory":
+                return new ObservableCollection<Conscript>(
+                    Conscripts.Where(c => c.FitnessCategory.ToLower().Contains(value.ToLower())));
+            case "Status":
+                return new ObservableCollection<Conscript>(
+                    Conscripts.Where(c => c.Status.ToLower().Contains(value.ToLower())));
+            default:
+                return new ObservableCollection<Conscript>(Conscripts);
+        }
+    }
 
-    public ObservableCollection<Conscript> FindConscriptsByAddress(string addressPart) =>
-        new(Conscripts.Where(c => !string.IsNullOrEmpty(c.Address) && c.Address.Contains(addressPart)));
+    public ObservableCollection<Officer> FilterOfficers(string criteria, string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return new ObservableCollection<Officer>(Officers);
 
-    public ObservableCollection<Officer> FindOfficersByRank(string rank) =>
-        new(Officers.Where(o => o.Rank == rank));
-
-    public ObservableCollection<Officer> FindOfficersByYearsOfService(int minYears, int maxYears) =>
-        new(Officers.Where(o => o.YearsOfService >= minYears && o.YearsOfService <= maxYears));
+        switch (criteria)
+        {
+            case "FullName":
+                return new ObservableCollection<Officer>(
+                    Officers.Where(o => o.FullName.ToLower().Contains(value.ToLower())));
+            case "Rank":
+                return new ObservableCollection<Officer>(
+                    Officers.Where(o => o.Rank.ToLower().Contains(value.ToLower())));
+            case "YearsOfService":
+                if (int.TryParse(value, out int years))
+                    return new ObservableCollection<Officer>(
+                        Officers.Where(o => o.YearsOfService == years));
+                return new ObservableCollection<Officer>(Officers);
+            default:
+                return new ObservableCollection<Officer>(Officers);
+        }
+     }
 }

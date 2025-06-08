@@ -139,7 +139,7 @@ public partial class NewConscriptWindow : Window
 
     private void CancelButton_Click(object sender, RoutedEventArgs e)
     {
-        FullNameTextBox = 
+       
     }
 
     private void ShowError(string message)
